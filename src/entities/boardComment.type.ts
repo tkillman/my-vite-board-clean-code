@@ -1,4 +1,3 @@
-export type BoardComment = {
-  boardCommentId: string;
-  content: string;
-};
+import { BoardCommentResDto } from './dto/res/boardCommentResDto';
+
+export type BoardCommentDto = BoardCommentResDto;
