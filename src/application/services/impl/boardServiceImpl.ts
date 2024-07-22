@@ -9,21 +9,19 @@ import { BoardService, CustomError } from '../boardService.types';
 import { systemAtom } from '../../repositories/recoil/system.recoil';
 
 const useBoardService = (): BoardService => {
-  console.log('useBoardService');
   const boardRepository = useBoardRepository();
-
   const systemAtomValue = useRecoilValue(systemAtom);
 
-  const saveBoard = async (newBoard: BoardCreateReqDto) => {
+  const createBoard = async (newBoard: BoardCreateReqDto) => {
     // 비지니스 로직
     if (systemAtomValue.isFilterFuck && isIncludeFuck(newBoard)) {
       throw new CustomError('욕설포함');
     }
 
-    boardRepository.saveBoard.mutate(newBoard);
+    await boardRepository.createBoard(newBoard);
   };
 
-  return { saveBoard };
+  return { createBoard };
 };
 
 export default useBoardService;

@@ -3,7 +3,6 @@ import { Notify } from '../repositories/recoil/notify.recoil';
 
 /**
  * 알림 모달을 띄우는 서비스
- * @
  */
 export interface NotifyService {
   /**

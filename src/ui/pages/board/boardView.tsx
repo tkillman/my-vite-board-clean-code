@@ -5,41 +5,39 @@ import useBoardController, {
 import { BoardWrapper, InputWrapper, SaveButton } from './boardView.style';
 import { Board, defaultBoard } from '../../../entities/board.domain';
 import FuckView from '../../component/fuckView';
-import { isSuccess } from '../../../entities/result.domain';
 
 const BoardView = () => {
-  const [{ title, content }, setBoard] = useState<Board>(defaultBoard);
-  const [successMessage, setSuccessMessage] = useState<string>('');
-  const isDiabled = !(title && content);
+  const onSuccess = () => {
+    setSuccessMessage('저장 성공~~~');
+  };
 
-  const boardController: BoardController = useBoardController();
+  const boardController: BoardController = useBoardController({ onSuccess });
+
+  const title = boardController.title;
+  const content = boardController.content;
+
+  const [successMessage, setSuccessMessage] = useState<string>('');
+  const isDiabled =
+    !(title && content) || boardController.saveBoardMutation.isPending;
 
   const onChange =
     (type: keyof Board) => (e: React.ChangeEvent<HTMLInputElement>) => {
       setSuccessMessage('');
       if (type === 'title') {
-        setBoard(prev => ({ ...prev, title: e.target.value }));
+        boardController.setBoard(prev => ({ ...prev, title: e.target.value }));
       } else if (type === 'content') {
-        setBoard(prev => ({ ...prev, content: e.target.value }));
+        boardController.setBoard(prev => ({
+          ...prev,
+          content: e.target.value,
+        }));
       }
     };
 
-  const onSuccess = () => {
-    setSuccessMessage('저장 성공!!');
-    setBoard(defaultBoard);
-  };
-
   const onClickSave = async () => {
-    const result = await boardController.createBoard({
+    await boardController.saveBoardMutation.mutateAsync({
       title: title,
       content: content,
     });
-
-    if (!isSuccess(result)) {
-      return;
-    }
-
-    onSuccess();
   };
 
   return (
