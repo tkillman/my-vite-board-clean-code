@@ -48,7 +48,7 @@ export const searchBoardListApi = async (
 ): Promise<CommonApiType<BoardResDto[]>> => {
   console.log('searchBoardListApi');
 
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       const boardData: BoardResDto[] = JSON.parse(
         localStorage.getItem(LocalStorageKey.boardData) ?? '[]'
@@ -59,6 +59,7 @@ export const searchBoardListApi = async (
         message: 'Board searchBoardListApi successfully',
         data: boardData,
       });
+      //reject('error');
     }, 2000);
   });
 };
