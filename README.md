@@ -43,3 +43,11 @@
 # ui
 
 화면 레이어
+
+# wiremock
+
+https://wiremock.org/
+
+# wiremock template
+
+https://wiremock.org/docs/mock-api-templates/

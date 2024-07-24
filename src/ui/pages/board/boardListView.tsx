@@ -17,6 +17,7 @@ const BoardListView = () => {
   const boardListController: BoardListController = useBoardListController();
   const searchTitle = boardListController.boardListReqDto.searchTitle;
   const list = boardListController.boardListQueryResult.data;
+  console.log('list', list);
   const isFetching = boardListController.boardListQueryResult.isFetching;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

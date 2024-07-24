@@ -3,7 +3,7 @@ import { BoardListReqDto } from '../dto/req/boardListReqDto';
 
 export const queryKeys = createQueryKeyStore({
   board: {
-    list: null,
+    list: [undefined],
     detail: null,
   },
 });
