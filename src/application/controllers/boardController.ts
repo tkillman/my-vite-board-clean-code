@@ -4,7 +4,6 @@ import useBoardService from '../services/impl/boardServiceImpl';
 import { BoardCreateReqDto } from '../../entities/dto/req/boardCreateReqDto';
 import { NotifyService } from '../services/notifyService.types';
 import useNotifyService from '../services/impl/notifyServiceImpl';
-import { RESULT } from '../../entities/result.domain';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Board, defaultBoard } from '../../entities/board.domain';

@@ -1,9 +1,4 @@
-import {
-  useQuery,
-  UseQueryResult,
-  useSuspenseQuery,
-  UseSuspenseQueryResult,
-} from '@tanstack/react-query';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import {
   BoardListReqDto,
   defaultBoardListReqDto,

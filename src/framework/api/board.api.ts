@@ -50,7 +50,15 @@ export const searchBoardListApi = async (
   boardListReqDto: BoardListReqDto
 ): Promise<any> => {
   console.log('searchBoardListApi');
-  const response = await fetch(`${apiDomain}/api/boardList`);
+  const response = await fetch(`${apiDomain}/api/boardList`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      searchTitle: boardListReqDto.searchTitle,
+    }),
+  });
   const data = await response.json();
   console.log('data', data);
   return data;
