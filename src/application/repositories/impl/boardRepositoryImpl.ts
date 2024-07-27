@@ -1,12 +1,38 @@
-import { useMutation } from '@tanstack/react-query';
 import { BoardCreateReqDto } from '../../../entities/dto/req/boardCreateReqDto';
-import { createBoardApi } from '../../../framework/api/board.api';
+import {
+  createBoardApi,
+  searchBoardDetailApi,
+  searchBoardListApi,
+} from '../../../framework/api/board.api';
 import { BoardRepository } from '../boardRepository.types';
+import { BoardListReqDto } from '../../../entities/dto/req/boardListReqDto';
+import {
+  BoardResDto,
+  convertBoardResDtoToBoard,
+} from '../../../entities/dto/res/boardResDto';
+import { Board, BOARD_ID } from '../../../entities/board.domain';
 
 export const useBoardRepository = (): BoardRepository => {
+  const searchBoardList = async (
+    boardListReqDto: BoardListReqDto
+  ): Promise<BoardResDto[]> => {
+    const response = await searchBoardListApi(boardListReqDto);
+    return response?.data ?? [];
+  };
+
   const createBoard = async (newBoard: BoardCreateReqDto) => {
     await createBoardApi(newBoard);
   };
 
-  return { createBoard };
+  const searchBoardDetail = async (boardId: BOARD_ID): Promise<Board> => {
+    const response = await searchBoardDetailApi(boardId);
+
+    if (!response?.data?.boardId) {
+      throw Error('Board not found');
+    }
+    const board = convertBoardResDtoToBoard(response.data);
+    return board;
+  };
+
+  return { createBoard, searchBoardList, searchBoardDetail };
 };

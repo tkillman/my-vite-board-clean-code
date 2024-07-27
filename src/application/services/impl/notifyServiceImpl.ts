@@ -1,20 +1,21 @@
-import { useRecoilState, useResetRecoilState } from 'recoil';
-import { NotifyService } from '../notifyService.types';
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
+
 import { notifyAtom } from '../../repositories/recoil/notify.recoil';
+import { NotifyService } from '../notifyService.types';
 
 const useNotifyService = (): NotifyService => {
-  const [notiftyAtomValue, setNotifyAtomValue] = useRecoilState(notifyAtom);
+  const setNotifyAtomValue = useSetRecoilState(notifyAtom);
   const resetNotifyAtomValue = useResetRecoilState(notifyAtom);
 
   const notify = (message: string) => {
-    setNotifyAtomValue(prev => ({
+    setNotifyAtomValue((prev) => ({
       ...prev,
       isOpen: true,
       message: message,
     }));
   };
 
-  return { notiftyAtomValue, setNotifyAtomValue, resetNotifyAtomValue, notify };
+  return { setNotifyAtomValue, resetNotifyAtomValue, notify };
 };
 
 export default useNotifyService;

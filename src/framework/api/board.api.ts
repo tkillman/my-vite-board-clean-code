@@ -1,9 +1,10 @@
+import { CommonApiType } from './commonApi.type';
+import { BOARD_ID } from '../../entities/board.domain';
 import { BoardCreateReqDto } from '../../entities/dto/req/boardCreateReqDto';
 import { BoardListReqDto } from '../../entities/dto/req/boardListReqDto';
 import { BoardResDto } from '../../entities/dto/res/boardResDto';
 import { LocalStorageKey } from '../../entities/localstorageKey.domain';
 import { targetApiDomain } from '../apiDoaminUtil';
-import { CommonApiType } from './commonApi.type';
 
 const apiDomain = targetApiDomain();
 
@@ -20,8 +21,7 @@ const createKey = () => {
 export const createBoardApi = async (
   newBoard: BoardCreateReqDto
 ): Promise<CommonApiType<BoardCreateReqDto>> => {
-
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       const boardData: BoardResDto[] = JSON.parse(
         localStorage.getItem(LocalStorageKey.boardData) ?? '[]'
@@ -47,7 +47,7 @@ export const createBoardApi = async (
 
 export const searchBoardListApi = async (
   boardListReqDto: BoardListReqDto
-): Promise<any> => {
+): Promise<CommonApiType<BoardResDto[]>> => {
   console.log('searchBoardListApi');
   const response = await fetch(`${apiDomain}/api/boardList`, {
     method: 'POST',
@@ -59,6 +59,19 @@ export const searchBoardListApi = async (
     }),
   });
   const data = await response.json();
-  console.log('data', data);
+  return data;
+};
+
+export const searchBoardDetailApi = async (
+  boardId: BOARD_ID
+): Promise<CommonApiType<BoardResDto>> => {
+  console.log('searchBoardDetailApi', boardId);
+  const response = await fetch(`${apiDomain}/api/boardDetail/${boardId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await response.json();
   return data;
 };

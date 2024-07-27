@@ -1,17 +1,11 @@
 import { Resetter, SetterOrUpdater } from 'recoil';
+
 import { Notify } from '../repositories/recoil/notify.recoil';
 
 /**
  * 알림 모달을 띄우는 서비스
  */
 export interface NotifyService {
-  /**
-   * 알림 모달 atom
-   *
-   * @type {Notify}
-   */
-  notiftyAtomValue: Notify;
-
   /**
    * 알림 모달 set
    *

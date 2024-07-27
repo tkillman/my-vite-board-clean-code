@@ -1,36 +1,48 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { useState } from 'react';
+
 import {
   BoardListReqDto,
   defaultBoardListReqDto,
 } from '../../entities/dto/req/boardListReqDto';
 import { BoardResDto } from '../../entities/dto/res/boardResDto';
-import useBoardListService from '../services/impl/boardListServiceImpl';
 import { queryKeys } from '../../entities/queryKey';
-import { useState } from 'react';
+import useBoardListService from '../services/impl/boardListServiceImpl';
+
+export type BoardListController = (
+  req?: BoardListControllerReq
+) => BoardListControllerRes;
 
 /**
- * 보드 목록 컨트롤러
+ * 게시판 목록 컨트롤러 요청타입
  */
-export interface BoardListController {
+interface BoardListControllerReq {
+  listQueryOptions?: {
+    enabled: boolean;
+  };
+}
+
+/**
+ * 게시판 목록 컨트롤러 리턴타입
+ */
+interface BoardListControllerRes {
   /**
-   * 보드 목록 요청 DTO
+   * 게시판 목록 요청 DTO
    */
   boardListReqDto: BoardListReqDto;
 
   /**
-   * 보드 목록 요청 DTO 설정
+   * 게시판 목록 요청 DTO 설정
    */
   setBoardListReqDto: React.Dispatch<React.SetStateAction<BoardListReqDto>>;
 
   /**
-   * 보드 목록 쿼리 결과
+   * 게시판 목록 쿼리 결과
    */
   boardListQueryResult: UseQueryResult<BoardResDto[], Error>;
 }
 
-export const useBoardListController = (queryOption?: {
-  enabled?: boolean;
-}): BoardListController => {
+export const useBoardListController: BoardListController = (req) => {
   const [boardListReqDto, setBoardListReqDto] = useState<BoardListReqDto>(
     defaultBoardListReqDto
   );
@@ -41,8 +53,12 @@ export const useBoardListController = (queryOption?: {
     queryKey: queryKeys.board.list.queryKey,
     queryFn: async () =>
       await boardListService.searchBoardList(boardListReqDto),
-    enabled: queryOption?.enabled,
+    enabled: req?.listQueryOptions?.enabled,
   });
 
-  return { boardListQueryResult, boardListReqDto, setBoardListReqDto };
+  return {
+    boardListQueryResult,
+    boardListReqDto,
+    setBoardListReqDto,
+  };
 };

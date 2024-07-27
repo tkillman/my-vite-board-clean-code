@@ -1,14 +1,15 @@
 import { useRecoilValue } from 'recoil';
+
 import {
   BoardCreateReqDto,
   isIncludeFuck,
 } from '../../../entities/dto/req/boardCreateReqDto';
+import { CustomError } from '../../../entities/error/customError';
 import { useBoardRepository } from '../../repositories/impl/boardRepositoryImpl';
-
-import { BoardService, CustomError } from '../boardService.types';
 import { systemAtom } from '../../repositories/recoil/system.recoil';
+import { BoardCreateService } from '../boardCreateService.types';
 
-const useBoardService = (): BoardService => {
+const useBoardCreateService = (): BoardCreateService => {
   const boardRepository = useBoardRepository();
   const systemAtomValue = useRecoilValue(systemAtom);
 
@@ -24,4 +25,4 @@ const useBoardService = (): BoardService => {
   return { createBoard };
 };
 
-export default useBoardService;
+export default useBoardCreateService;

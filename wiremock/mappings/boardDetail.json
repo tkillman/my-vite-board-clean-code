@@ -1,12 +1,7 @@
 {
   "request": {
-    "method": "POST",
-    "url": "/api/boardList",
-    "headers": {
-      "Content-Type": {
-        "equalTo": "application/json"
-      }
-    }
+    "method": "GET",
+    "urlPathPattern": "/api/boardDetail/(\\d+)"
   },
   "response": {
     "headers": {
@@ -16,6 +11,6 @@
       "Access-Control-Allow-Headers": "Content-Type, Authorization"
     },
     "status": 200,
-    "bodyFileName": "boardList.json"
+    "bodyFileName": "boardDetail.json"
   }
 }

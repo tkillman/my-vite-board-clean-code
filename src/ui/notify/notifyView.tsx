@@ -1,6 +1,3 @@
-import useNotifyController, {
-  NotifyController,
-} from '../../application/controllers/notifyController';
 import {
   ModalBackdrop,
   ModalBtn,
@@ -9,6 +6,9 @@ import {
   ModalMessage,
   ModalTitle,
 } from './notifyView.style';
+import useNotifyController, {
+  NotifyController,
+} from '../../application/controllers/notifyController';
 
 const ModalView = () => {
   const notifyController: NotifyController = useNotifyController();

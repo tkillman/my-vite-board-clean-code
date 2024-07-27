@@ -6,7 +6,7 @@ const FuckView = () => {
   const [{ isFilterFuck }, setSystemAtomValue] = useRecoilState(systemAtom);
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSystemAtomValue(prev => ({
+    setSystemAtomValue((prev) => ({
       ...prev,
       isFilterFuck: event.target.value === 'okFuck',
     }));

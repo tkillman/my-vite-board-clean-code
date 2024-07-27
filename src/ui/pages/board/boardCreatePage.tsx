@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import useBoardCreateController, {
-  BoardCreateController,
-} from '../../../application/controllers/boardCreate/boardCreateController';
+
 import {
   BoardWrapper,
   InputWrapper,
   SaveButton,
 } from './boardCreatePage.style';
+import useBoardCreateController, {
+  BoardCreateController,
+} from '../../../application/controllers/boardCreate/boardCreateController';
 import { Board } from '../../../entities/board.domain';
 import FuckView from '../../component/fuckView';
 
@@ -30,9 +31,12 @@ const BoardCreatePage = () => {
     (type: keyof Board) => (e: React.ChangeEvent<HTMLInputElement>) => {
       setSuccessMessage('');
       if (type === 'title') {
-        boardController.setBoard(prev => ({ ...prev, title: e.target.value }));
+        boardController.setBoard((prev) => ({
+          ...prev,
+          title: e.target.value,
+        }));
       } else if (type === 'content') {
-        boardController.setBoard(prev => ({
+        boardController.setBoard((prev) => ({
           ...prev,
           content: e.target.value,
         }));

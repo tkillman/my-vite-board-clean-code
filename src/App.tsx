@@ -13,6 +13,9 @@ const LazyBoardListPage = React.lazy(
 const LazyBoardCreatePage = React.lazy(
   () => import('./ui/pages/board/boardCreatePage')
 );
+const LazyBoardDetailPage = React.lazy(
+  () => import('./ui/pages/board/boardDetailPage')
+);
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,6 +30,7 @@ const targetElement = (routePath: RoutePath) => {
     <React.Suspense fallback={<div>로딩중</div>}>
       {routePath === RoutePath.MAIN && <LazyBoardListPage />}
       {routePath === RoutePath.BOARD_CREATE && <LazyBoardCreatePage />}
+      {routePath === RoutePath.BOARD_DETAIL && <LazyBoardDetailPage />}
     </React.Suspense>
   );
 };
@@ -42,6 +46,10 @@ const App = () => {
               <Route
                 path={RoutePath.BOARD_CREATE}
                 element={targetElement(RoutePath.BOARD_CREATE)}
+              />
+              <Route
+                path={RoutePath.BOARD_DETAIL}
+                element={targetElement(RoutePath.BOARD_DETAIL)}
               />
             </Route>
           </Routes>

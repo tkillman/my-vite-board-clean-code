@@ -1,4 +1,6 @@
-import { Notify } from '../repositories/recoil/notify.recoil';
+import { useRecoilValue } from 'recoil';
+
+import { Notify, notifyAtom } from '../repositories/recoil/notify.recoil';
 import useNotifyService from '../services/impl/notifyServiceImpl';
 import { NotifyService } from '../services/notifyService.types';
 
@@ -36,13 +38,14 @@ export interface NotifyController {
 
 const useNotifyController = (): NotifyController => {
   const notifyService: NotifyService = useNotifyService();
+  const notiftyAtomValue = useRecoilValue(notifyAtom);
 
   const notify = (message: string) => {
     notifyService.notify(message);
   };
 
   const toggle = () => {
-    notifyService.setNotifyAtomValue(prev => ({
+    notifyService.setNotifyAtomValue((prev) => ({
       ...prev,
       isOpen: !prev.isOpen,
     }));
@@ -53,7 +56,7 @@ const useNotifyController = (): NotifyController => {
   };
 
   return {
-    notiftyAtomValue: notifyService.notiftyAtomValue,
+    notiftyAtomValue: notiftyAtomValue,
     notify,
     toggle,
     closeNotify,

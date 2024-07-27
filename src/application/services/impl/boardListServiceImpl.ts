@@ -1,12 +1,12 @@
 import { BoardListReqDto } from '../../../entities/dto/req/boardListReqDto';
-import { useBoardListRepository } from '../../repositories/impl/boardListRepositoryImpl';
+import { useBoardRepository } from '../../repositories/impl/boardRepositoryImpl';
 import { BoardListService } from '../boardListService.types';
 
 const useBoardListService = (): BoardListService => {
-  const boardListRepository = useBoardListRepository();
+  const boardRepository = useBoardRepository();
 
   const searchBoardList = async (boardListReqDto: BoardListReqDto) => {
-    return await boardListRepository.searchBoardList(boardListReqDto);
+    return await boardRepository.searchBoardList(boardListReqDto);
   };
   return { searchBoardList };
 };

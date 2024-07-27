@@ -1,8 +1,4 @@
-import React, { useState } from 'react';
-import {
-  BoardListController,
-  useBoardListController,
-} from '../../../application/controllers/boardListController';
+import { useNavigate } from 'react-router-dom';
 
 import {
   ListContainer,
@@ -12,16 +8,23 @@ import {
   ListRowWrapper,
   ListSearchWrapper,
 } from './boardListPage.style';
+import { useBoardListController } from '../../../application/controllers/boardListController';
+import { Board } from '../../../entities/board.domain';
+import { RoutePath } from '../../../entities/route.domain';
 
 const BoardListPage = () => {
-  const boardListController: BoardListController = useBoardListController();
+  const boardListController = useBoardListController({
+    listQueryOptions: { enabled: false },
+  });
   const searchTitle = boardListController.boardListReqDto.searchTitle;
   const list = boardListController.boardListQueryResult.data;
-  console.log('list', list);
+
   const isFetching = boardListController.boardListQueryResult.isFetching;
 
+  const navigate = useNavigate();
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    boardListController.setBoardListReqDto(prev => ({
+    boardListController.setBoardListReqDto((prev) => ({
       ...prev,
       searchTitle: e.target.value,
     }));
@@ -35,6 +38,11 @@ const BoardListPage = () => {
     if (e.key === 'Enter') {
       onClickSearch();
     }
+  };
+
+  const onClickRow = (row: Board) => async () => {
+    console.log('row', row);
+    navigate(RoutePath.BOARD_DETAIL, { state: { boardId: row.boardId } });
   };
 
   return (
@@ -63,7 +71,7 @@ const BoardListPage = () => {
           {!isFetching &&
             list?.map((row, index) => {
               return (
-                <ListRow key={row.boardId}>
+                <ListRow key={row.boardId} onClick={onClickRow(row)}>
                   <div>{index}</div>
                   <div>{row.title}</div>
                   <div>{row.content}</div>
