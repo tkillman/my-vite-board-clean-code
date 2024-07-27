@@ -1,17 +1,23 @@
 import { useState } from 'react';
-import useBoardController, {
-  BoardController,
-} from '../../../application/controllers/boardController';
-import { BoardWrapper, InputWrapper, SaveButton } from './boardView.style';
-import { Board, defaultBoard } from '../../../entities/board.domain';
+import useBoardCreateController, {
+  BoardCreateController,
+} from '../../../application/controllers/boardCreate/boardCreateController';
+import {
+  BoardWrapper,
+  InputWrapper,
+  SaveButton,
+} from './boardCreatePage.style';
+import { Board } from '../../../entities/board.domain';
 import FuckView from '../../component/fuckView';
 
-const BoardView = () => {
+const BoardCreatePage = () => {
   const onSuccess = () => {
     setSuccessMessage('저장 성공~~~');
   };
 
-  const boardController: BoardController = useBoardController({ onSuccess });
+  const boardController: BoardCreateController = useBoardCreateController({
+    onSuccess,
+  });
 
   const title = boardController.title;
   const content = boardController.content;
@@ -69,4 +75,4 @@ const BoardView = () => {
   );
 };
 
-export default BoardView;
+export default BoardCreatePage;

@@ -20,7 +20,6 @@ const createKey = () => {
 export const createBoardApi = async (
   newBoard: BoardCreateReqDto
 ): Promise<CommonApiType<BoardCreateReqDto>> => {
-  console.log('saveBoardApi', newBoard);
 
   return new Promise(resolve => {
     setTimeout(() => {

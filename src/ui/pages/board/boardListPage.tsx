@@ -11,9 +11,9 @@ import {
   ListRow,
   ListRowWrapper,
   ListSearchWrapper,
-} from './boardListView.style';
+} from './boardListPage.style';
 
-const BoardListView = () => {
+const BoardListPage = () => {
   const boardListController: BoardListController = useBoardListController();
   const searchTitle = boardListController.boardListReqDto.searchTitle;
   const list = boardListController.boardListQueryResult.data;
@@ -76,4 +76,4 @@ const BoardListView = () => {
   );
 };
 
-export default BoardListView;
+export default BoardListPage;

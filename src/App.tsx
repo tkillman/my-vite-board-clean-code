@@ -7,10 +7,12 @@ import MasterLayout from './ui/layout/masterLayout';
 import { RoutePath } from './entities/route.domain';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-const LazyBoardListView = React.lazy(
-  () => import('./ui/pages/board/boardListView')
+const LazyBoardListPage = React.lazy(
+  () => import('./ui/pages/board/boardListPage')
 );
-const LazyBoardView = React.lazy(() => import('./ui/pages/board/boardView'));
+const LazyBoardCreatePage = React.lazy(
+  () => import('./ui/pages/board/boardCreatePage')
+);
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,8 +25,8 @@ const queryClient = new QueryClient({
 const targetElement = (routePath: RoutePath) => {
   return (
     <React.Suspense fallback={<div>로딩중</div>}>
-      {routePath === RoutePath.MAIN && <LazyBoardListView />}
-      {routePath === RoutePath.DETAIL && <LazyBoardView />}
+      {routePath === RoutePath.MAIN && <LazyBoardListPage />}
+      {routePath === RoutePath.BOARD_CREATE && <LazyBoardCreatePage />}
     </React.Suspense>
   );
 };
@@ -38,8 +40,8 @@ const App = () => {
             <Route path={RoutePath.MAIN} element={<MasterLayout />}>
               <Route index element={targetElement(RoutePath.MAIN)} />
               <Route
-                path={RoutePath.DETAIL}
-                element={targetElement(RoutePath.DETAIL)}
+                path={RoutePath.BOARD_CREATE}
+                element={targetElement(RoutePath.BOARD_CREATE)}
               />
             </Route>
           </Routes>
