@@ -6,6 +6,10 @@ export const BoardWrapper = styled('div')`
   flex-direction: column;
 `;
 
+export const BoardHeadWrapper = styled('div')`
+  padding: 20px 0px;
+`;
+
 export const InputWrapper = styled('div')`
   display: flex;
   gap: 10px;

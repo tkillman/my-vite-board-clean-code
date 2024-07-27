@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -14,9 +15,19 @@ import { Board } from '../../../entities/board.domain';
 import { RoutePath } from '../../../entities/route.domain';
 
 const BoardListPage = () => {
+  const [initialLoad, setInitialLoad] = useState(true);
+
   const boardListController = useBoardListController({
     listQueryOptions: { enabled: false },
   });
+
+  useEffect(() => {
+    if (initialLoad) {
+      boardListController.boardListQueryResult.refetch(); // 초기 렌더링 시 한 번만 쿼리 실행
+      setInitialLoad(false);
+    }
+  }, [initialLoad, boardListController]);
+
   const searchTitle = boardListController.boardListReqDto.searchTitle;
   const list = boardListController.boardListQueryResult.data;
 
