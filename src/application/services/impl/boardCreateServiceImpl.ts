@@ -19,7 +19,13 @@ const useBoardCreateService = (): BoardCreateService => {
       throw new CustomError('욕설포함');
     }
 
-    await boardRepository.createBoard(newBoard);
+    const board = await boardRepository.createBoard(newBoard);
+
+    if (!board) {
+      throw Error('등록 중 에러가 발생하였습니다.');
+    }
+
+    return board;
   };
 
   return { createBoard };

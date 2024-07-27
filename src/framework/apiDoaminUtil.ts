@@ -1,5 +1,3 @@
-console.log('vite env', import.meta.env);
-
 const isMock = import.meta.env.VITE_MOCK_SERVER_YN === 'Y';
 
 /**

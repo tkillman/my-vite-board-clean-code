@@ -1,4 +1,5 @@
 import { BoardCreateReqDto } from '../../entities/dto/req/boardCreateReqDto';
+import { BoardCreateResDto } from '../../entities/dto/res/boardCreateResDto';
 
 /**
  * 게시판 등록 서비스
@@ -10,5 +11,7 @@ export interface BoardCreateService {
    * @returns void
    * @throws {CustomError} 게시판 등록 실패 시 발생
    */
-  createBoard: (boardCreateReqDto: BoardCreateReqDto) => Promise<void>;
+  createBoard: (
+    boardCreateReqDto: BoardCreateReqDto
+  ) => Promise<BoardCreateResDto>;
 }

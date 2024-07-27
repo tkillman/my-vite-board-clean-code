@@ -27,7 +27,6 @@ interface BoardDetailControllerRes {
 }
 
 export const useBoardDetailController: BoardDetailController = (req) => {
-  console.log('useBoardDetailController', req.boardId);
   const boardDetailService = useBoardDetailService();
 
   const boardDetailQueryResult = useQuery({

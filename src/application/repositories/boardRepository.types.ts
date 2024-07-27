@@ -1,15 +1,18 @@
 import { BOARD_ID } from '../../entities/board.domain';
 import { BoardCreateReqDto } from '../../entities/dto/req/boardCreateReqDto';
 import { BoardListReqDto } from '../../entities/dto/req/boardListReqDto';
+import { BoardCreateResDto } from '../../entities/dto/res/boardCreateResDto';
 import { BoardResDto } from '../../entities/dto/res/boardResDto';
 
 export interface BoardRepository {
   /**
    * 게시판 등록
-   * @param {BoardCreateReqDto} 신규 게시판 정보
-   * @returns void
+   * @param {BoardCreateReqDto} - 신규 게시판 정보
+   * @returns {BoardCreateResDto | undefined} - 게시판 등록 결과
    */
-  createBoard: (boardCreateReqDto: BoardCreateReqDto) => Promise<void>;
+  createBoard: (
+    boardCreateReqDto: BoardCreateReqDto
+  ) => Promise<BoardCreateResDto | undefined>;
 
   /**
    * 게시판 목록 조회

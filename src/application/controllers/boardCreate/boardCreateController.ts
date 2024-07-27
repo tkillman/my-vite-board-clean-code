@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { Board, defaultBoard } from '../../../entities/board.domain';
 import { BoardCreateReqDto } from '../../../entities/dto/req/boardCreateReqDto';
+import { BoardCreateResDto } from '../../../entities/dto/res/boardCreateResDto';
 import { BoardResDto } from '../../../entities/dto/res/boardResDto';
 import { CustomError } from '../../../entities/error/customError';
 import useBoardCreateService from '../../services/impl/boardCreateServiceImpl';
@@ -32,25 +33,30 @@ export interface BoardCreateController {
   /**
    * 게시판 저장 Mutation
    */
-  saveBoardMutation: UseMutationResult<void, Error, BoardCreateReqDto, unknown>;
+  createBoardMutation: UseMutationResult<
+    BoardCreateResDto,
+    Error,
+    BoardCreateReqDto,
+    unknown
+  >;
 }
 
 const useBoardCreateController = ({
   onSuccess,
 }: {
-  onSuccess?: VoidFunction;
+  onSuccess?: (data: BoardCreateResDto) => void;
 }): BoardCreateController => {
   const [{ title, content }, setBoard] = useState<Board>(defaultBoard);
 
   const boardCreateService = useBoardCreateService(); // 게시판 서비스 DI 주입
   const notifyService: NotifyService = useNotifyService(); // 알림 서비스 DI 주입
 
-  const saveBoardMutation = useMutation({
+  const createBoardMutation = useMutation({
     mutationFn: (boardCreateReqDto: BoardCreateReqDto) =>
       boardCreateService.createBoard(boardCreateReqDto),
-    onSuccess: () => {
+    onSuccess: (data) => {
       notifyService.notify('저장 성공');
-      onSuccess?.();
+      onSuccess?.(data);
     },
     onError: (error: Error) => {
       if (error instanceof CustomError) {
@@ -62,7 +68,7 @@ const useBoardCreateController = ({
     },
   });
 
-  return { saveBoardMutation, title, content, setBoard: setBoard };
+  return { createBoardMutation, title, content, setBoard: setBoard };
 };
 
 export default useBoardCreateController;

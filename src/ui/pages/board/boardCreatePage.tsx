@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
   BoardWrapper,
@@ -9,11 +10,19 @@ import useBoardCreateController, {
   BoardCreateController,
 } from '../../../application/controllers/boardCreate/boardCreateController';
 import { Board } from '../../../entities/board.domain';
+import { BoardCreateResDto } from '../../../entities/dto/res/boardCreateResDto';
+import { RoutePath } from '../../../entities/route.domain';
 import FuckView from '../../component/fuckView';
 
 const BoardCreatePage = () => {
-  const onSuccess = () => {
-    setSuccessMessage('저장 성공~~~');
+  //const [successMessage, setSuccessMessage] = useState<string>('');
+
+  const navigate = useNavigate();
+
+  const onSuccess = (data: BoardCreateResDto) => {
+    //setSuccessMessage('저장 성공~~~');
+
+    navigate(RoutePath.BOARD_DETAIL, { state: { boardId: data.boardId } });
   };
 
   const boardController: BoardCreateController = useBoardCreateController({
@@ -23,13 +32,12 @@ const BoardCreatePage = () => {
   const title = boardController.title;
   const content = boardController.content;
 
-  const [successMessage, setSuccessMessage] = useState<string>('');
   const isDiabled =
-    !(title && content) || boardController.saveBoardMutation.isPending;
+    !(title && content) || boardController.createBoardMutation.isPending;
 
   const onChange =
     (type: keyof Board) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setSuccessMessage('');
+      //setSuccessMessage('');
       if (type === 'title') {
         boardController.setBoard((prev) => ({
           ...prev,
@@ -44,7 +52,7 @@ const BoardCreatePage = () => {
     };
 
   const onClickSave = async () => {
-    await boardController.saveBoardMutation.mutateAsync({
+    await boardController.createBoardMutation.mutateAsync({
       title: title,
       content: content,
     });
@@ -71,7 +79,7 @@ const BoardCreatePage = () => {
           onChange={onChange('content')}
         ></input>
       </InputWrapper>
-      <div>{successMessage}</div>
+      {/* <div>{successMessage}</div> */}
       <SaveButton type="button" onClick={onClickSave} disabled={isDiabled}>
         저장
       </SaveButton>

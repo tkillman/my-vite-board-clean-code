@@ -6,6 +6,7 @@ import {
   ListLoadingWrapper,
   ListRow,
   ListRowWrapper,
+  ListSearchRow,
   ListSearchWrapper,
 } from './boardListPage.style';
 import { useBoardListController } from '../../../application/controllers/boardListController';
@@ -41,24 +42,35 @@ const BoardListPage = () => {
   };
 
   const onClickRow = (row: Board) => async () => {
-    console.log('row', row);
     navigate(RoutePath.BOARD_DETAIL, { state: { boardId: row.boardId } });
+  };
+
+  const onClickSave = () => {
+    navigate(RoutePath.BOARD_CREATE);
   };
 
   return (
     <div>
       <h1>Board List View</h1>
       <ListSearchWrapper>
-        <p>제목</p>
-        <input
-          type="text"
-          value={searchTitle}
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-        ></input>
-        <button type="button" onClick={onClickSearch}>
-          조회
-        </button>
+        <ListSearchRow style={{ gap: '10px' }}>
+          <p>제목</p>
+          <input
+            type="text"
+            style={{ padding: '0.6em 1.2em' }}
+            value={searchTitle}
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+          ></input>
+          <button type="button" onClick={onClickSearch}>
+            조회
+          </button>
+        </ListSearchRow>
+        <ListSearchRow>
+          <button type="button" onClick={onClickSave}>
+            새글 등록
+          </button>
+        </ListSearchRow>
       </ListSearchWrapper>
       <ListContainer>
         <ListHeader>
