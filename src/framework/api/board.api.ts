@@ -2,8 +2,10 @@ import { CommonApiType } from './commonApi.type';
 import { BOARD_ID } from '../../entities/board.domain';
 import { BoardCreateReqDto } from '../../entities/dto/req/boardCreateReqDto';
 import { BoardListReqDto } from '../../entities/dto/req/boardListReqDto';
+import { BoardUpdateReqDto } from '../../entities/dto/req/boardUpdateReqDto';
 import { BoardCreateResDto } from '../../entities/dto/res/boardCreateResDto';
 import { BoardResDto } from '../../entities/dto/res/boardResDto';
+import { BoardUpdateResDto } from '../../entities/dto/res/boardUpdateResDto';
 import { targetApiDomain } from '../apiDoaminUtil';
 
 const apiDomain = targetApiDomain();
@@ -54,6 +56,27 @@ export const searchBoardDetailApi = async (
       },
     }
   );
+  const data = await response.json();
+  return data;
+};
+
+export const updateBoardApi = async (
+  boardUpdateReqDto: BoardUpdateReqDto
+): Promise<CommonApiType<BoardUpdateResDto>> => {
+  const response = await fetch(
+    `${apiDomain}/api/updateBoard/${boardUpdateReqDto.boardId}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: boardUpdateReqDto.title,
+        content: boardUpdateReqDto.content,
+      }),
+    }
+  );
+
   const data = await response.json();
   return data;
 };

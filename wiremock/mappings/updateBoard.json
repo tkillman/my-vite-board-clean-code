@@ -1,14 +1,16 @@
 {
   "request": {
-    "method": "OPTIONS",
-    "urlPattern": ".*"
+    "method": "PATCH",
+    "urlPathPattern": "/api/updateBoard/(\\d+)"
   },
   "response": {
-    "status": 200,
     "headers": {
+      "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type, Authorization"
-    }
+    },
+    "status": 200,
+    "bodyFileName": "updateBoard.json"
   }
 }

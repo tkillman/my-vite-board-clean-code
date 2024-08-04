@@ -1,11 +1,12 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React, { PropsWithChildren } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 //import BoardView from './ui/pages/board/boardView';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RecoilRoot } from 'recoil';
-import MasterLayout from './ui/layout/masterLayout';
+
 import { RoutePath } from './entities/route.domain';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import MasterLayout from './ui/layout/masterLayout';
 
 const LazyBoardListPage = React.lazy(
   () => import('./ui/pages/board/boardListPage')

@@ -1,4 +1,5 @@
 import { BoardCommentResDto } from './boardCommentResDto';
+import { Board } from '../../board.domain';
 
 export type BoardResDto = {
   boardId: string; // 게시판 primary key
@@ -7,10 +8,10 @@ export type BoardResDto = {
   boardComments?: BoardCommentResDto[]; // 게시판에 달린 댓글
 };
 
-export const convertBoardResDtoToBoard = (boardResDto: BoardResDto) => {
+export const convertBoardResDtoToBoard = (boardResDto: BoardResDto): Board => {
   return {
-    boardId: boardResDto?.boardId,
-    title: boardResDto?.title || '',
-    content: boardResDto?.content || '',
+    boardId: boardResDto.boardId,
+    title: boardResDto.title || '',
+    content: boardResDto.content || '',
   };
 };
