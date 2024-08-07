@@ -12,7 +12,8 @@
     "preview": "vite preview",
     "ts-check": "tsc --project tsconfig.app.json",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "@lukemorales/query-key-factory": "^1.3.4",
