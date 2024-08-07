@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -6,13 +5,14 @@ import {
   InputWrapper,
   SaveButton,
 } from './boardCreatePage.style';
-import useBoardCreateController, {
-  BoardCreateController,
-} from '../../../application/controllers/boardCreate/boardCreateController';
 import { Board } from '../../../entities/board.domain';
 import { BoardCreateResDto } from '../../../entities/dto/res/boardCreateResDto';
 import { RoutePath } from '../../../entities/route.domain';
-import FuckView from '../../component/fuckView';
+
+import useBoardCreateController, {
+  BoardCreateController,
+} from '~/src/application/controllers/boardCreate/boardCreateController';
+import FuckView from '~/src/ui/component/fuckView';
 
 const BoardCreatePage = () => {
   //const [successMessage, setSuccessMessage] = useState<string>('');
