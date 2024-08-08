@@ -3,7 +3,7 @@ name: Execute Command on Local Machine
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   execute-command:
