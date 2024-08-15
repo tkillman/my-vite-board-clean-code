@@ -5,6 +5,7 @@ import { BoardUpdateReqDto } from '../../../entities/dto/req/boardUpdateReqDto';
 import {
   BoardResDto,
   convertBoardResDtoToBoard,
+  SearchBoardDetailApiResponse,
 } from '../../../entities/dto/res/boardResDto';
 import { convertBoardUpdateResDtoToBoard } from '../../../entities/dto/res/boardUpdateResDto';
 import {
@@ -28,14 +29,11 @@ export const useBoardRepository = (): BoardRepository => {
     return response?.data;
   };
 
-  const searchBoardDetail = async (boardId: BOARD_ID): Promise<Board> => {
+  const searchBoardDetail = async (
+    boardId: BOARD_ID
+  ): Promise<SearchBoardDetailApiResponse> => {
     const response = await searchBoardDetailApi(boardId);
-
-    if (!response?.data?.boardId) {
-      throw Error('Board not found');
-    }
-    const board = convertBoardResDtoToBoard(response.data);
-    return board;
+    return response;
   };
 
   const updateBoard = async (boardUpdateReqDto: BoardUpdateReqDto) => {

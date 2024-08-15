@@ -3,7 +3,10 @@ import { BoardCreateReqDto } from '../../entities/dto/req/boardCreateReqDto';
 import { BoardListReqDto } from '../../entities/dto/req/boardListReqDto';
 import { BoardUpdateReqDto } from '../../entities/dto/req/boardUpdateReqDto';
 import { BoardCreateResDto } from '../../entities/dto/res/boardCreateResDto';
-import { BoardResDto } from '../../entities/dto/res/boardResDto';
+import {
+  BoardResDto,
+  SearchBoardDetailApiResponse,
+} from '../../entities/dto/res/boardResDto';
 import { BoardUpdateResDto } from '../../entities/dto/res/boardUpdateResDto';
 
 export interface BoardRepository {
@@ -28,7 +31,9 @@ export interface BoardRepository {
    * @param {BOARD_ID} boardId - 게시판판 ID
    * @returns {BoardResDto} - 게시판 상세정보
    */
-  searchBoardDetail: (boardId: BOARD_ID) => Promise<BoardResDto>;
+  searchBoardDetail: (
+    boardId: BOARD_ID
+  ) => Promise<SearchBoardDetailApiResponse>;
 
   /**
    * 게시판 수정
