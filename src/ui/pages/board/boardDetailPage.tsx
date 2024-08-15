@@ -16,8 +16,8 @@ const BoardDetailPage = () => {
     boardId,
   }); // 게시판 상세 조회 컨트롤러
 
-  const title = boardDetailController.boardDetailQueryResult.data?.title; // 제목
-  const content = boardDetailController.boardDetailQueryResult.data?.content; // 내용
+  const title = boardDetailController.board.title; // 제목
+  const content = boardDetailController.board.content; // 내용
   console.log('content', content);
   const isEditable = boardDetailController.isEditable;
 

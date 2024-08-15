@@ -44,6 +44,11 @@ interface BoardDetailControllerRes {
   boardId: BOARD_ID;
 
   /**
+   * 게시판 정보
+   */
+  board: Board;
+
+  /**
    * 게시판 상세 조회 쿼리 결과
    */
   boardDetailQueryResult: UseQueryResult<Board, Error>;
@@ -112,13 +117,19 @@ export const useBoardDetailController: BoardDetailController = (req) => {
     enabled: !!req.boardId,
   });
 
+  useEffect(() => {
+    if (boardDetailQueryResult.data) {
+      setBoard(boardDetailQueryResult.data);
+    }
+  }, [boardDetailQueryResult.data]);
+
   const updateBoardMutation = useMutation({
     mutationFn: (boardUpdateReqDto: BoardUpdateReqDto) =>
       boardDetailService.update(boardUpdateReqDto),
     onSuccess: (data) => {
       console.log('🚀 ~ data:', data);
       notify('수정 성공');
-      queryClient.invalidateQueries({
+      queryClient.removeQueries({
         queryKey: queryKeys.board.detail(req.boardId).queryKey,
       });
     },
@@ -170,6 +181,7 @@ export const useBoardDetailController: BoardDetailController = (req) => {
 
   return {
     boardId: req.boardId,
+    board,
     boardDetailQueryResult,
     updateBoardMutation,
     isEditable,
