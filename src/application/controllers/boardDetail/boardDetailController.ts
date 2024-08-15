@@ -17,6 +17,8 @@ import useBoardDetailService from '../../services/impl/boardDetailServiceImpl';
 import useNotifyService from '../../services/impl/notifyServiceImpl';
 import { NotifyService } from '../../services/notifyService.types';
 
+import { CustomError } from '~/src/entities/error/customError';
+
 /**
  * 게시판 상세 컨트롤러
  */
@@ -96,7 +98,7 @@ interface BoardDetailControllerRes {
 
 export const useBoardDetailController: BoardDetailController = (req) => {
   const boardDetailService = useBoardDetailService(); // 게시판 상세 서비스 DI 주입
-  const { notify }: NotifyService = useNotifyService(); // 알림 서비스 DI 주입
+  const notifyService: NotifyService = useNotifyService(); // 알림 서비스 DI 주입
   const [isEditable, setIsEditable] = useState<boolean>(false);
   const [board, setBoard] = useState<Board>(defaultBoard);
 
@@ -106,10 +108,10 @@ export const useBoardDetailController: BoardDetailController = (req) => {
 
   useEffect(() => {
     if (!req.boardId) {
-      notify('게시판 ID가 없습니다.');
+      notifyService.notify('게시판 ID가 없습니다.');
       navigate(RoutePath.MAIN);
     }
-  }, [req.boardId, navigate, notify]);
+  }, [req.boardId, navigate, notifyService]);
 
   const boardDetailQueryResult = useQuery({
     queryKey: queryKeys.board.detail(req.boardId).queryKey,
@@ -128,16 +130,24 @@ export const useBoardDetailController: BoardDetailController = (req) => {
       boardDetailService.update(boardUpdateReqDto),
     onSuccess: (data) => {
       console.log('🚀 ~ data:', data);
-      notify('수정 성공');
+      notifyService.notify('수정 성공');
       queryClient.removeQueries({
         queryKey: queryKeys.board.detail(req.boardId).queryKey,
       });
+    },
+    onError: (error: Error) => {
+      if (error instanceof CustomError) {
+        notifyService.notify(error.message);
+      } else {
+        console.error(error);
+        notifyService.notify('알수없는 에러가 발생하였습니다.');
+      }
     },
   });
 
   const handleUpdate = async () => {
     if (!board) {
-      notify('게시판 정보가 없습니다.');
+      notifyService.notify('게시판 정보가 없습니다.');
       return;
     }
 

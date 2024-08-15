@@ -1,6 +1,8 @@
 import { useRecoilState } from 'recoil';
+
 import { systemAtom } from '../../application/repositories/recoil/system.recoil';
-import { fuckWords } from '../../entities/dto/req/boardCreateReqDto';
+
+import { fuckWords } from '~/src/entities/system.domain';
 
 const FuckView = () => {
   const [{ isFilterFuck }, setSystemAtomValue] = useRecoilState(systemAtom);

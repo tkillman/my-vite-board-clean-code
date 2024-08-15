@@ -12,7 +12,6 @@ import { RoutePath } from '../../../entities/route.domain';
 import useBoardCreateController, {
   BoardCreateController,
 } from '~/src/application/controllers/boardCreate/boardCreateController';
-import FuckView from '~/src/ui/component/fuckView';
 
 const BoardCreatePage = () => {
   //const [successMessage, setSuccessMessage] = useState<string>('');
@@ -60,7 +59,6 @@ const BoardCreatePage = () => {
 
   return (
     <BoardWrapper>
-      <FuckView />
       <InputWrapper>
         <span>제목</span>
         <input

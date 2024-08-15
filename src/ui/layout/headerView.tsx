@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { RoutePath } from '../../entities/route.domain';
+import FuckView from '../component/fuckView';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Header = () => {
 
   return (
     <div>
-      Header
+      <FuckView />
       <div>
         <button onClick={onClickMain}>메인 이동</button>
       </div>
