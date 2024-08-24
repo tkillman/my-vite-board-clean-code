@@ -1,7 +1,6 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 
-import { Board, defaultBoard } from '../../../entities/board.domain';
 import { BoardCreateReqDto } from '../../../entities/dto/req/boardCreateReqDto';
 import { BoardCreateResDto } from '../../../entities/dto/res/boardCreateResDto';
 import { BoardResDto } from '../../../entities/dto/res/boardResDto';
@@ -10,25 +9,23 @@ import useBoardCreateService from '../../services/impl/boardCreateServiceImpl';
 import useNotifyService from '../../services/impl/notifyServiceImpl';
 import { NotifyService } from '../../services/notifyService.types';
 
+import { Board } from '~/src/entities/board.domain';
+import { boardState } from '~/src/entities/recoil/board.recoil';
+
 /**
  * 게시판 등록 컨트롤러를 나타내는 인터페이스입니다.
  * @interface BoardCreateController
  */
 export interface BoardCreateController {
   /**
-   * 게시판 제목
+   * 게시판
    */
-  title: string;
+  board: Board;
 
   /**
    * 게시판 제목 설정
    */
   setBoard: React.Dispatch<React.SetStateAction<BoardResDto>>;
-
-  /**
-   * 게시판 내용
-   */
-  content: string;
 
   /**
    * 게시판 저장 Mutation
@@ -46,7 +43,7 @@ const useBoardCreateController = ({
 }: {
   onSuccess?: (data: BoardCreateResDto) => void;
 }): BoardCreateController => {
-  const [{ title, content }, setBoard] = useState<Board>(defaultBoard);
+  const [board, setBoard] = useRecoilState(boardState);
 
   const boardCreateService = useBoardCreateService(); // 게시판 서비스 DI 주입
   const notifyService: NotifyService = useNotifyService(); // 알림 서비스 DI 주입
@@ -68,7 +65,7 @@ const useBoardCreateController = ({
     },
   });
 
-  return { createBoardMutation, title, content, setBoard: setBoard };
+  return { createBoardMutation, board, setBoard: setBoard };
 };
 
 export default useBoardCreateController;

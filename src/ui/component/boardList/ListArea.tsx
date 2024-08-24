@@ -41,7 +41,6 @@ const ListArea: React.ForwardRefRenderFunction<IRefListArea, IProps> = (
   }));
 
   const list = boardListController.boardListQueryResult.data;
-  console.log('list', list);
   const isFetching = boardListController.boardListQueryResult.isFetching;
 
   const navigate = useNavigate();
