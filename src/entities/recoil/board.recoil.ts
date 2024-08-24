@@ -20,6 +20,9 @@ export const boardTitleState = selector<Board['title']>({
       title: newValue instanceof DefaultValue ? defaultBoard.title : newValue,
     });
   },
+  cachePolicy_UNSTABLE: {
+    eviction: 'most-recent',
+  },
 });
 
 export const boardContentState = selector<Board['content']>({
@@ -35,5 +38,8 @@ export const boardContentState = selector<Board['content']>({
       content:
         newValue instanceof DefaultValue ? defaultBoard.content : newValue,
     });
+  },
+  cachePolicy_UNSTABLE: {
+    eviction: 'most-recent',
   },
 });

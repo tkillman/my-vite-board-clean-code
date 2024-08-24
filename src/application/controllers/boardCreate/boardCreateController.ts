@@ -1,4 +1,5 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { BoardCreateReqDto } from '../../../entities/dto/req/boardCreateReqDto';
@@ -9,7 +10,7 @@ import useBoardCreateService from '../../services/impl/boardCreateServiceImpl';
 import useNotifyService from '../../services/impl/notifyServiceImpl';
 import { NotifyService } from '../../services/notifyService.types';
 
-import { Board } from '~/src/entities/board.domain';
+import { Board, defaultBoard } from '~/src/entities/board.domain';
 import { boardState } from '~/src/entities/recoil/board.recoil';
 
 /**
@@ -43,6 +44,7 @@ const useBoardCreateController = ({
 }: {
   onSuccess?: (data: BoardCreateResDto) => void;
 }): BoardCreateController => {
+  //const [board, setBoard] = useState<Board>(defaultBoard);
   const [board, setBoard] = useRecoilState(boardState);
 
   const boardCreateService = useBoardCreateService(); // 게시판 서비스 DI 주입
