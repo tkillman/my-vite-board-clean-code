@@ -50,7 +50,7 @@ export const useBoardListController: BoardListController = (req) => {
   const boardListService = useBoardListService();
 
   const boardListQueryResult = useQuery({
-    queryKey: queryKeys.board.list(boardListReqDto).queryKey,
+    queryKey: queryKeys.board.list.queryKey,
     queryFn: async () =>
       await boardListService.searchBoardList(boardListReqDto),
     enabled: req?.listQueryOptions?.enabled,

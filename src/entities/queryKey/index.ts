@@ -5,7 +5,7 @@ import { BoardListReqDto } from '../dto/req/boardListReqDto';
 
 export const queryKeys = createQueryKeyStore({
   board: {
-    list: (boardListReqDto: BoardListReqDto) => [boardListReqDto.searchTitle],
+    list: null,
     detail: (boardId: BOARD_ID) => [boardId],
   },
 });
