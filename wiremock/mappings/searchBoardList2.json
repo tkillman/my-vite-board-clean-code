@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/searchBoardList",
+    "bodyPatterns": [
+      {
+        "equalToJson": "{\"searchTitle\": \"123\"}"
+      }
+    ]
+  },
+  "response": {
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    },
+    "status": 200,
+    "bodyFileName": "searchBoardList2.json"
+  }
+}

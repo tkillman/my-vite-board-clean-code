@@ -18,7 +18,7 @@ const BoardDetailPage = () => {
 
   const title = boardDetailController.board.title; // 제목
   const content = boardDetailController.board.content; // 내용
-  console.log('content', content);
+
   const isEditable = boardDetailController.isEditable;
 
   return (

@@ -1,0 +1,21 @@
+{
+  "status": 200,
+  "message": "성공",
+  "data": [
+    {
+      "boardId": "2",
+      "title": "제목2",
+      "content": "내용2"
+    },
+    {
+      "boardId": "3",
+      "title": "제목3",
+      "content": "내용3"
+    },
+    {
+      "boardId": "4",
+      "title": "제목3",
+      "content": "내용3"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useRef } from 'react';
 
 import {
   BoardListReqDto,
@@ -27,38 +27,36 @@ interface BoardListControllerReq {
  */
 interface BoardListControllerRes {
   /**
-   * 게시판 목록 요청 DTO
-   */
-  boardListReqDto: BoardListReqDto;
-
-  /**
-   * 게시판 목록 요청 DTO 설정
-   */
-  setBoardListReqDto: React.Dispatch<React.SetStateAction<BoardListReqDto>>;
-
-  /**
    * 게시판 목록 쿼리 결과
    */
   boardListQueryResult: UseQueryResult<BoardResDto[], Error>;
+
+  /**
+   * 게시판 검색조건 변경
+   * @param boardListReqDto
+   * @returns
+   */
+  changeSearchValue: (boardListReqDto: BoardListReqDto) => void;
 }
 
 export const useBoardListController: BoardListController = (req) => {
-  const [boardListReqDto, setBoardListReqDto] = useState<BoardListReqDto>(
-    defaultBoardListReqDto
-  );
-
   const boardListService = useBoardListService();
+
+  const refSearchValue = useRef<BoardListReqDto>(defaultBoardListReqDto);
 
   const boardListQueryResult = useQuery({
     queryKey: queryKeys.board.list.queryKey,
     queryFn: async () =>
-      await boardListService.searchBoardList(boardListReqDto),
+      await boardListService.searchBoardList(refSearchValue.current),
     enabled: req?.listQueryOptions?.enabled,
   });
 
+  const changeSearchValue = (boardListReqDto: BoardListReqDto) => {
+    refSearchValue.current = boardListReqDto;
+  };
+
   return {
     boardListQueryResult,
-    boardListReqDto,
-    setBoardListReqDto,
+    changeSearchValue,
   };
 };
