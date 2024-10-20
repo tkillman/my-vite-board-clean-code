@@ -1,0 +1,6 @@
+{
+  "watch": ["wiremock"],
+  "ext": "json",
+  "exec": "echo 'restart' && yarn wiremock --root-dir ./wiremock --port 8081 --no-request-journal",
+  "verbose": true
+}

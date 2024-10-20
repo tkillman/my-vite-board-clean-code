@@ -28,6 +28,10 @@ const ListArea: React.ForwardRefRenderFunction<IRefListArea, IProps> = (
     listQueryOptions: { enabled: false },
   });
 
+  const handleError = () => {
+    console.log('handleError');
+  };
+
   useEffect(() => {
     boardListController.boardListQueryResult.refetch(); // 초기 렌더링 시 한 번만 쿼리 실행
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,6 +52,15 @@ const ListArea: React.ForwardRefRenderFunction<IRefListArea, IProps> = (
   const onClickRow = (row: Board) => async () => {
     navigate(RoutePath.BOARD_DETAIL, { state: { boardId: row.boardId } });
   };
+
+  if (boardListController.boardListQueryResult.isLoading) {
+    return <div>로딩중...</div>;
+  }
+
+  if (boardListController.boardListQueryResult.isError) {
+    handleError();
+    return <div>에러가 발생했습니다.</div>;
+  }
 
   return (
     <ListContainer>

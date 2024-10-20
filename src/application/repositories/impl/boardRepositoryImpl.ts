@@ -14,14 +14,20 @@ import {
   searchBoardListApi,
   updateBoardApi,
 } from '../../../framework/api/board.api';
-import { BoardRepository } from '../boardRepository.types';
 
-export const useBoardRepository = (): BoardRepository => {
+import { searchBoardListAxiosApi } from '~/src/framework/api/boardAxios.api';
+
+export const useBoardRepository = () => {
   const searchBoardList = async (
     boardListReqDto: BoardListReqDto
   ): Promise<BoardResDto[]> => {
-    const response = await searchBoardListApi(boardListReqDto);
-    return response?.data ?? [];
+    // fetch api
+    // const response = await searchBoardListApi(boardListReqDto);
+    // return response?.data ?? [];
+
+    const response = await searchBoardListAxiosApi(boardListReqDto);
+    console.log('response', response);
+    return response?.data.data ?? [];
   };
 
   const createBoard = async (boardCreateDto: BoardCreateReqDto) => {
@@ -47,5 +53,17 @@ export const useBoardRepository = (): BoardRepository => {
     return board;
   };
 
-  return { createBoard, updateBoard, searchBoardList, searchBoardDetail };
+  // const searchBoardListAxios = async () => {
+  //   const response = await searchBoardListAxiosApi();
+
+  //   console.log('response', response);
+  //   return response?.data.data ?? [];
+  // };
+
+  return {
+    createBoard,
+    updateBoard,
+    searchBoardList,
+    searchBoardDetail,
+  };
 };

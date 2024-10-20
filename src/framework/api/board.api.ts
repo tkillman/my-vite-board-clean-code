@@ -8,6 +8,8 @@ import { BoardResDto } from '../../entities/dto/res/boardResDto';
 import { BoardUpdateResDto } from '../../entities/dto/res/boardUpdateResDto';
 import { targetApiDomain } from '../apiDoaminUtil';
 
+import { SearchBoardListApiResponse } from '~/src/entities/dto/res/searchBoardListResDto';
+
 const apiDomain = targetApiDomain();
 
 export const createBoardApi = async (
@@ -30,7 +32,7 @@ export const createBoardApi = async (
 
 export const searchBoardListApi = async (
   boardListReqDto: BoardListReqDto
-): Promise<CommonApiType<BoardResDto[]>> => {
+): Promise<SearchBoardListApiResponse> => {
   const response = await fetch(`${apiDomain}/api/searchBoardList`, {
     method: 'POST',
     headers: {
