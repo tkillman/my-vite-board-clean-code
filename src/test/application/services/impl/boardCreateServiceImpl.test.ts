@@ -9,14 +9,14 @@ import { CustomError } from '~/src/entities/error/customError';
 vi.mock('~/src/application/repositories/impl/boardRepositoryImpl');
 vi.mock('recoil');
 
-describe('useBoardCreateService', () => {
+describe('보드 생성 테스트', () => {
   const boardCreateReqDto: BoardCreateReqDto = {
     // fill in the required fields for BoardCreateReqDto
     title: 'title',
     content: 'content',
   };
 
-  it('should create a board successfully', async () => {
+  it('보드 생성 성공', async () => {
     const mockCreateBoard = vi.fn().mockResolvedValue({
       // mock the response of createBoard
       boardId: '1',
@@ -39,7 +39,7 @@ describe('useBoardCreateService', () => {
     expect(mockCreateBoard).toHaveBeenCalledWith(boardCreateReqDto);
   });
 
-  it('should throw an error if the board contains inappropriate language', async () => {
+  it('욕설이 포함된 경우 보드 생성 실패', async () => {
     const boardCreateFuckReqDto: BoardCreateReqDto = {
       title: '욕설포함',
       content: '시발',
@@ -56,7 +56,7 @@ describe('useBoardCreateService', () => {
     );
   });
 
-  it('should throw an error if the board creation fails', async () => {
+  it('보드 생성 실패 시', async () => {
     const mockCreateBoard = vi.fn().mockResolvedValue(null);
 
     (useBoardRepository as Mock).mockReturnValue({
