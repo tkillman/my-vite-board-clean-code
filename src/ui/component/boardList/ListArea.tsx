@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { forwardRef, memo, useEffect, useImperativeHandle } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,6 +13,7 @@ import {
 import { useBoardListController } from '~/src/application/controllers/boardListController';
 import { Board } from '~/src/entities/board.domain';
 import { BoardListReqDto } from '~/src/entities/dto/req/boardListReqDto';
+import { SearchBoardListApiResponse } from '~/src/entities/dto/res/searchBoardListResDto';
 import { RoutePath } from '~/src/entities/route.domain';
 
 interface IProps {}
@@ -28,8 +30,26 @@ const ListArea: React.ForwardRefRenderFunction<IRefListArea, IProps> = (
     listQueryOptions: { enabled: false },
   });
 
-  const handleError = () => {
+  const handleError = (error: Error) => {
     console.log('handleError');
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        if (error.response.status === 201) {
+          alert('201 error');
+        }
+        console.log('error.response', error.response.data);
+        // const responseData: SearchBoardListApiResponse = {
+        //   status: error.response.status,
+        //   message: error.response.data.message,
+        //   data: error.response.data.data,
+        // };
+      } else if (error.request) {
+        // 요청이 전송되었지만, 응답이 수신되지 않았습니다.
+        console.log('요청이 전송되었지만, 응답이 수신되지 않았습니다.');
+      } else {
+        console.log('Error', error.message);
+      }
+    }
   };
 
   useEffect(() => {
@@ -58,7 +78,12 @@ const ListArea: React.ForwardRefRenderFunction<IRefListArea, IProps> = (
   }
 
   if (boardListController.boardListQueryResult.isError) {
-    handleError();
+    console.log(
+      'boardListController.boardListQueryResult.error',
+      boardListController.boardListQueryResult.error
+    );
+
+    handleError(boardListController.boardListQueryResult.error);
     return <div>에러가 발생했습니다.</div>;
   }
 

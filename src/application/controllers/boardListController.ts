@@ -9,9 +9,7 @@ import { BoardResDto } from '../../entities/dto/res/boardResDto';
 import { queryKeys } from '../../entities/queryKey';
 import useBoardListService from '../services/impl/boardListServiceImpl';
 
-export type BoardListController = (
-  req?: BoardListControllerReq
-) => BoardListControllerRes;
+import { SearchBoardListApiResponse } from '~/src/entities/dto/res/searchBoardListResDto';
 
 /**
  * 게시판 목록 컨트롤러 요청타입
@@ -22,29 +20,12 @@ interface BoardListControllerReq {
   };
 }
 
-/**
- * 게시판 목록 컨트롤러 리턴타입
- */
-interface BoardListControllerRes {
-  /**
-   * 게시판 목록 쿼리 결과
-   */
-  boardListQueryResult: UseQueryResult<BoardResDto[], Error>;
-
-  /**
-   * 게시판 검색조건 변경
-   * @param boardListReqDto
-   * @returns
-   */
-  changeSearchValue: (boardListReqDto: BoardListReqDto) => void;
-}
-
-export const useBoardListController: BoardListController = (req) => {
+export const useBoardListController = (req: BoardListControllerReq) => {
   const boardListService = useBoardListService();
 
   const refSearchValue = useRef<BoardListReqDto>(defaultBoardListReqDto);
 
-  const boardListQueryResult = useQuery({
+  const boardListQueryResult = useQuery<BoardResDto[]>({
     queryKey: queryKeys.board.list.queryKey,
     queryFn: async () =>
       await boardListService.searchBoardList(refSearchValue.current),

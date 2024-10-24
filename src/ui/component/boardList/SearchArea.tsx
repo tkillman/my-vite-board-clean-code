@@ -40,6 +40,14 @@ const SearchArea: React.FC<IProps> = (props: IProps) => {
         <button type="button" onClick={onClickSearch}>
           조회
         </button>
+        <button
+          type="button"
+          onClick={() => {
+            throw new Error('Sentry Test Error');
+          }}
+        >
+          Break the world
+        </button>
       </ListSearchRow>
       <ListSearchRow>
         <button type="button" onClick={onClickSave}>
