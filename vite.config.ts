@@ -13,6 +13,20 @@ export default defineConfig({
     }),
   ],
   resolve: {
-    alias: [{ find: '~', replacement: path.resolve(__dirname, '.') }],
+    alias: [
+      { find: '~/src', replacement: path.resolve(__dirname, 'src') },
+      {
+        find: '~/pages',
+        replacement: path.resolve(__dirname, 'src/ui/pages'),
+      },
+      {
+        find: '~/component',
+        replacement: path.resolve(__dirname, 'src/ui/component'),
+      },
+      {
+        find: '~/controllers',
+        replacement: path.resolve(__dirname, 'src/application/controllers'),
+      },
+    ],
   },
 });

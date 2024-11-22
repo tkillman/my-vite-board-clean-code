@@ -17,15 +17,9 @@ import { RecoilRoot } from 'recoil';
 import { RoutePath } from './entities/route.domain';
 import MasterLayout from './ui/layout/masterLayout';
 
-const LazyBoardListPage = React.lazy(
-  () => import('./ui/pages/board/boardListPage')
-);
-const LazyBoardCreatePage = React.lazy(
-  () => import('./ui/pages/board/boardCreatePage')
-);
-const LazyBoardDetailPage = React.lazy(
-  () => import('./ui/pages/board/boardDetailPage')
-);
+const LazyBoardListPage = React.lazy(() => import('~/pages/boardListPage'));
+const LazyBoardCreatePage = React.lazy(() => import('~/pages/board_create'));
+const LazyBoardDetailPage = React.lazy(() => import('~/pages/board_detail'));
 
 const queryClient = new QueryClient({
   defaultOptions: {

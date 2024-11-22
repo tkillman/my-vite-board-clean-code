@@ -24,7 +24,10 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./",
     "paths": {
-      "~/src/*": ["src/*"]
+      "~/src/*": ["src/*"],
+      "~/pages/*": ["src/ui/pages/*"],
+      "~/component/*": ["src/ui/component/*"],
+      "~/controllers/*": ["src/application/controllers/*"]
     }
   },
   "include": ["src"]

@@ -1,8 +1,7 @@
 import { useRef } from 'react';
 
-import ListArea, { IRefListArea } from '../../component/boardList/ListArea';
-import SearchArea from '../../component/boardList/SearchArea';
-
+import ListArea, { IRefListArea } from '~/component/boardList/ListArea';
+import SearchArea from '~/component/boardList/SearchArea';
 import { BoardListReqDto } from '~/src/entities/dto/req/boardListReqDto';
 
 const BoardListPage = () => {
