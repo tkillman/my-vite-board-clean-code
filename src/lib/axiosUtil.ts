@@ -1,5 +1,8 @@
 // src/api/axiosInstance.ts
+import * as Sentry from '@sentry/react';
 import axios, { AxiosInstance } from 'axios';
+
+import { sentryLogger } from './sentryLogger';
 
 const axiosInstance: AxiosInstance = axios.create({
   timeout: 5000, // 요청 타임아웃 시간 (밀리초 단위)
@@ -26,10 +29,9 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
-      // 인증 에러 처리 (예: 로그인 페이지로 리다이렉트)
-      alert('Unauthorized! Redirecting to login...');
-    }
+    // 센트리 로깅
+    //sentryLogger(error);
+
     return Promise.reject(error);
   }
 );

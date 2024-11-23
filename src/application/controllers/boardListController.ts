@@ -1,15 +1,15 @@
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useRef } from 'react';
 
 import {
   BoardListReqDto,
   defaultBoardListReqDto,
 } from '../../entities/dto/req/boardListReqDto';
-import { BoardResDto } from '../../entities/dto/res/boardResDto';
-import { queryKeys } from '../../entities/queryKey';
-import useBoardListService from '../services/impl/boardListServiceImpl';
 
-import { SearchBoardListApiResponse } from '~/src/entities/dto/res/searchBoardListResDto';
+import { BoardResDto } from '~/entities/dto/res/boardResDto';
+import { queryKeys } from '~/entities/queryKey';
+import { SearchBoardListAxiosResponse } from '~/src/entities/dto/res/searchBoardListResDto';
+import { searchBoardListAxiosApi } from '~/src/framework/api/boardAxios.api';
 
 /**
  * 게시판 목록 컨트롤러 요청타입
@@ -21,14 +21,18 @@ interface BoardListControllerReq {
 }
 
 export const useBoardListController = (req: BoardListControllerReq) => {
-  const boardListService = useBoardListService();
-
   const refSearchValue = useRef<BoardListReqDto>(defaultBoardListReqDto);
 
-  const boardListQueryResult = useQuery<BoardResDto[]>({
+  const boardListQueryResult = useQuery<
+    SearchBoardListAxiosResponse,
+    Error,
+    BoardResDto[]
+  >({
     queryKey: queryKeys.board.list.queryKey,
-    queryFn: async () =>
-      await boardListService.searchBoardList(refSearchValue.current),
+    queryFn: async () => await searchBoardListAxiosApi(refSearchValue.current),
+    select: (response) => {
+      return response?.data.data ?? [];
+    },
     enabled: req?.listQueryOptions?.enabled,
   });
 

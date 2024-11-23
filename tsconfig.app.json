@@ -27,7 +27,8 @@
       "~/src/*": ["src/*"],
       "~/pages/*": ["src/ui/pages/*"],
       "~/component/*": ["src/ui/component/*"],
-      "~/controllers/*": ["src/application/controllers/*"]
+      "~/controllers/*": ["src/application/controllers/*"],
+      "~/entities/*": ["src/entities/*"]
     }
   },
   "include": ["src"]

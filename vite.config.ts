@@ -27,6 +27,10 @@ export default defineConfig({
         find: '~/controllers',
         replacement: path.resolve(__dirname, 'src/application/controllers'),
       },
+      {
+        find: '~/entities',
+        replacement: path.resolve(__dirname, 'src/entities/'),
+      },
     ],
   },
 });

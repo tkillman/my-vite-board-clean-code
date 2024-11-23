@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 
 import { BoardCommentResDto } from './boardCommentResDto';
 
-import { CommonApiType } from '~/src/framework/api/commonApi.type';
+import { CommonApiType } from '~/entities/common/commonApi.type';
 
 export type SearchBoardListResDto = {
   boardId: string; // 게시판 primary key

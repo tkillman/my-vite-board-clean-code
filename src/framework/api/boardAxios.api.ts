@@ -13,8 +13,11 @@ export const searchBoardListAxiosApi = async (
   const response = await axiosInstance.post<SearchBoardListApiResponse>(
     `${apiDomain}/api/searchBoardList`,
     {
-      params: {
-        searchTitle: boardListReqDto.searchTitle,
+      searchTitle: boardListReqDto.searchTitle,
+    },
+    {
+      headers: {
+        aaa: 'bbb',
       },
     }
   );

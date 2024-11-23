@@ -1,5 +1,5 @@
-import { CommonApiType } from './commonApi.type';
 import { BOARD_ID } from '../../entities/board.domain';
+import { CommonApiType } from '../../entities/common/commonApi.type';
 import { BoardCreateReqDto } from '../../entities/dto/req/boardCreateReqDto';
 import { BoardListReqDto } from '../../entities/dto/req/boardListReqDto';
 import { BoardUpdateReqDto } from '../../entities/dto/req/boardUpdateReqDto';
