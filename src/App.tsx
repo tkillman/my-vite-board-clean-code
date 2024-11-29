@@ -17,7 +17,7 @@ import { RecoilRoot } from 'recoil';
 import { RoutePath } from './entities/route.domain';
 import MasterLayout from './ui/component/masterLayout/masterLayout';
 
-const LazyBoardListPage = React.lazy(() => import('~/pages/boardListPage'));
+const LazyMainPage = React.lazy(() => import('~/pages/mainPage'));
 const LazyBoardCreatePage = React.lazy(() => import('~/pages/board_create'));
 const LazyBoardDetailPage = React.lazy(() => import('~/pages/board_detail'));
 
@@ -33,7 +33,7 @@ const queryClient = new QueryClient({
 const targetElement = (routePath: RoutePath) => {
   return (
     <React.Suspense fallback={<div>로딩중</div>}>
-      {routePath === RoutePath.MAIN && <LazyBoardListPage />}
+      {routePath === RoutePath.MAIN && <LazyMainPage />}
       {routePath === RoutePath.BOARD_CREATE && <LazyBoardCreatePage />}
       {routePath === RoutePath.BOARD_DETAIL && <LazyBoardDetailPage />}
     </React.Suspense>

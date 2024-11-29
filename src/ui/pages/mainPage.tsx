@@ -4,7 +4,7 @@ import ListArea, { IRefListArea } from '~/component/boardList/ListArea';
 import SearchArea from '~/component/boardList/SearchArea';
 import { BoardListReqDto } from '~/src/entities/dto/req/boardListReqDto';
 
-const BoardListPage = () => {
+const MainPage = () => {
   const refListArea = useRef<IRefListArea>(null);
 
   const handleOnClickSearch = (boardListReqDto: BoardListReqDto) => {
@@ -20,4 +20,4 @@ const BoardListPage = () => {
   );
 };
 
-export default BoardListPage;
+export default MainPage;
