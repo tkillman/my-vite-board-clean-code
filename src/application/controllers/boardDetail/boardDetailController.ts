@@ -11,13 +11,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { Board, BOARD_ID, defaultBoard } from '../../../entities/board.domain';
 import { BoardUpdateReqDto } from '../../../entities/dto/req/boardUpdateReqDto';
-import { queryKeys } from '../../../entities/queryKey';
 import { RoutePath } from '../../../entities/route.domain';
 import useBoardDetailService from '../../services/impl/boardDetailServiceImpl';
 import useNotifyService from '../../services/impl/notifyServiceImpl';
 import { NotifyService } from '../../services/notifyService.types';
 
 import { CustomError } from '~/src/entities/error/customError';
+import { queryKeys } from '~/src/framework/api/boardAxios.api';
 
 /**
  * 게시판 상세 컨트롤러
