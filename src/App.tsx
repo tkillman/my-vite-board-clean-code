@@ -15,7 +15,7 @@ import {
 import { RecoilRoot } from 'recoil';
 
 import { RoutePath } from './entities/route.domain';
-import MasterLayout from './ui/layout/masterLayout';
+import MasterLayout from './ui/component/masterLayout/masterLayout';
 
 const LazyBoardListPage = React.lazy(() => import('~/pages/boardListPage'));
 const LazyBoardCreatePage = React.lazy(() => import('~/pages/board_create'));
@@ -67,27 +67,27 @@ const App = () => {
 
 export default App;
 
-Sentry.init({
-  dsn: 'https://3258429933038159eb72865056efeb88@o4508155676459008.ingest.us.sentry.io/4508341954412544',
-  // integrations: [
-  //   Sentry.browserTracingIntegration(),
-  //   // Sentry.browserApiErrorsIntegration({
-  //   //   setTimeout: true,
-  //   //   setInterval: true,
-  //   //   requestAnimationFrame: true,
-  //   //   XMLHttpRequest: true,
-  //   //   eventTarget: true,
-  //   // }),
-  //   // Sentry.breadcrumbsIntegration({
-  //   //   console: true,
-  //   //   dom: true,
-  //   //   fetch: true,
-  //   //   history: true,
-  //   //   xhr: true,
-  //   // }),
-  //   Sentry.httpClientIntegration(),
-  // ],
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for tracing.
-  tracesSampleRate: 1.0,
-});
+// Sentry.init({
+//   dsn: 'https://3258429933038159eb72865056efeb88@o4508155676459008.ingest.us.sentry.io/4508341954412544',
+//   // integrations: [
+//   //   Sentry.browserTracingIntegration(),
+//   //   // Sentry.browserApiErrorsIntegration({
+//   //   //   setTimeout: true,
+//   //   //   setInterval: true,
+//   //   //   requestAnimationFrame: true,
+//   //   //   XMLHttpRequest: true,
+//   //   //   eventTarget: true,
+//   //   // }),
+//   //   // Sentry.breadcrumbsIntegration({
+//   //   //   console: true,
+//   //   //   dom: true,
+//   //   //   fetch: true,
+//   //   //   history: true,
+//   //   //   xhr: true,
+//   //   // }),
+//   //   Sentry.httpClientIntegration(),
+//   // ],
+//   // Set tracesSampleRate to 1.0 to capture 100%
+//   // of transactions for tracing.
+//   tracesSampleRate: 1.0,
+// });

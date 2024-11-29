@@ -1,7 +1,8 @@
-import { Outlet } from 'react-router-dom';
-import Footer from './footerView';
-import Header from './headerView';
 import React from 'react';
+import { Outlet } from 'react-router-dom';
+
+import Footer from '../footer/footerView';
+import Header from '../header/headerView';
 
 const LazyNotifyView = React.lazy(() => import('../notify/notifyView'));
 

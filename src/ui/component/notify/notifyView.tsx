@@ -8,9 +8,9 @@ import {
 } from './notifyView.style';
 import useNotifyController, {
   NotifyController,
-} from '../../application/controllers/notifyController';
+} from '../../../application/controllers/notifyController';
 
-const ModalView = () => {
+const NotifyView = () => {
   const notifyController: NotifyController = useNotifyController();
 
   const isOpen = notifyController.notiftyAtomValue.isOpen;
@@ -39,4 +39,4 @@ const ModalView = () => {
   );
 };
 
-export default ModalView;
+export default NotifyView;
