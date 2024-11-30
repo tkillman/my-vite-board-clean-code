@@ -7,7 +7,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 import { RoutePath } from './entities/route.domain';
-import MasterLayout from './ui/components/layout/masterLayout';
+import MasterLayout from './ui/views/layout/masterLayout';
 
 const LazyMainPage = React.lazy(() => import('~/pages/mainPage'));
 const LazyBoardCreatePage = React.lazy(() => import('~/pages/boardCreatePage'));
