@@ -1,8 +1,6 @@
-import SolidComponent from '../../component/solid/SolidComponent';
+import SolidComponent from '~/components/solid/SolidComponent';
 
 const SolidPage = () => {
-  const handleSearch = () => {};
-
   return (
     <div>
       <h1>Solid</h1>

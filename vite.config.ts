@@ -17,15 +17,27 @@ export default defineConfig({
       { find: '~/src', replacement: path.resolve(__dirname, 'src') },
       {
         find: '~/pages',
-        replacement: path.resolve(__dirname, 'src/ui/pages'),
+        replacement: path.resolve(__dirname, 'src/pages'),
       },
       {
-        find: '~/component',
-        replacement: path.resolve(__dirname, 'src/ui/component'),
+        find: '~/components',
+        replacement: path.resolve(__dirname, 'src/ui/components'),
+      },
+      {
+        find: '~/views',
+        replacement: path.resolve(__dirname, 'src/ui/views'),
       },
       {
         find: '~/controllers',
         replacement: path.resolve(__dirname, 'src/application/controllers'),
+      },
+      {
+        find: '~/presenters',
+        replacement: path.resolve(__dirname, 'src/application/presenters'),
+      },
+      {
+        find: '~/services',
+        replacement: path.resolve(__dirname, 'src/application/services'),
       },
       {
         find: '~/entities',

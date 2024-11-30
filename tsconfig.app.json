@@ -25,9 +25,12 @@
     "baseUrl": "./",
     "paths": {
       "~/src/*": ["src/*"],
-      "~/pages/*": ["src/ui/pages/*"],
-      "~/component/*": ["src/ui/component/*"],
+      "~/pages/*": ["src/pages/*"],
+      "~/components/*": ["src/ui/components/*"],
+      "~/views/*": ["src/ui/views/*"],
       "~/controllers/*": ["src/application/controllers/*"],
+      "~/presenters/*": ["src/application/presenters/*"],
+      "~/services/*": ["src/application/services/*"],
       "~/entities/*": ["src/entities/*"]
     }
   },

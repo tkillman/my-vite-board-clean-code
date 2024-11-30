@@ -1,25 +1,17 @@
 import * as Sentry from '@sentry/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import React, { useEffect } from 'react';
-import {
-  HashRouter,
-  Route,
-  Routes,
-  createRoutesFromChildren,
-  matchRoutes,
-  useLocation,
-  useNavigationType,
-} from 'react-router-dom';
+import React from 'react';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 //import BoardView from './ui/pages/board/boardView';
 import { RecoilRoot } from 'recoil';
 
 import { RoutePath } from './entities/route.domain';
-import MasterLayout from './ui/component/masterLayout/masterLayout';
+import MasterLayout from './ui/components/layout/masterLayout';
 
 const LazyMainPage = React.lazy(() => import('~/pages/mainPage'));
-const LazyBoardCreatePage = React.lazy(() => import('~/pages/board_create'));
-const LazyBoardDetailPage = React.lazy(() => import('~/pages/board_detail'));
+const LazyBoardCreatePage = React.lazy(() => import('~/pages/boardCreatePage'));
+const LazyBoardDetailPage = React.lazy(() => import('~/pages/boardDetailPage'));
 
 const queryClient = new QueryClient({
   defaultOptions: {

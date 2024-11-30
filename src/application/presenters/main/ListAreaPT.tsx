@@ -6,7 +6,7 @@ import {
   queryKeys,
   searchBoardListAxiosApi,
 } from '~/src/framework/api/boardAxios.api';
-import ListAreaUI from '~/src/ui/main/ListAreaUI';
+import ListAreaUI from '~/src/ui/views/main/ListAreaUI';
 
 const ListAreaPT = () => {
   const queryResult = useQuery<

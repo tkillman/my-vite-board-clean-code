@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
-import FuckView from '~/component/fuckView';
 import { RoutePath } from '~/entities/route.domain';
+import FuckView from '~/src/ui/components/fuckView';
 
 const Header = () => {
   const navigate = useNavigate();

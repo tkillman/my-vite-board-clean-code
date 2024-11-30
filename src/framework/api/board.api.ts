@@ -1,13 +1,13 @@
 import { BOARD_ID } from '../../entities/board.domain';
 import { CommonApiType } from '../../entities/common/commonApi.type';
 import { BoardCreateReqDto } from '../../entities/dto/req/boardCreateReqDto';
-import { BoardListReqDto } from '../../entities/dto/req/boardListReqDto';
 import { BoardUpdateReqDto } from '../../entities/dto/req/boardUpdateReqDto';
 import { BoardCreateResDto } from '../../entities/dto/res/boardCreateResDto';
 import { BoardResDto } from '../../entities/dto/res/boardResDto';
 import { BoardUpdateResDto } from '../../entities/dto/res/boardUpdateResDto';
-import { targetApiDomain } from '../apiDoaminUtil';
+import { targetApiDomain } from '../apiDomainUtil';
 
+import { SearchBoardListReqDto } from '~/src/entities/dto/req/searchBoardListReqDto';
 import { SearchBoardListApiResponse } from '~/src/entities/dto/res/searchBoardListResDto';
 
 const apiDomain = targetApiDomain();
@@ -31,7 +31,7 @@ export const createBoardApi = async (
 };
 
 export const searchBoardListApi = async (
-  boardListReqDto: BoardListReqDto
+  boardListReqDto: SearchBoardListReqDto
 ): Promise<SearchBoardListApiResponse> => {
   const response = await fetch(`${apiDomain}/api/searchBoardList`, {
     method: 'POST',

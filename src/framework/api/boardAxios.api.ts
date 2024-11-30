@@ -1,11 +1,10 @@
 // src/api/apiService.ts
 import { createQueryKeyStore } from '@lukemorales/query-key-factory';
 
-import { targetApiDomain } from '../apiDoaminUtil';
-
 import { BOARD_ID } from '~/src/entities/board.domain';
-import { BoardListReqDto } from '~/src/entities/dto/req/boardListReqDto';
+import { SearchBoardListReqDto } from '~/src/entities/dto/req/searchBoardListReqDto';
 import { SearchBoardListApiResponse } from '~/src/entities/dto/res/searchBoardListResDto';
+import { targetApiDomain } from '~/src/framework/apiDomainUtil';
 import axiosInstance from '~/src/lib/axiosUtil';
 
 const apiDomain = targetApiDomain();
@@ -18,7 +17,7 @@ export const queryKeys = createQueryKeyStore({
 });
 
 export const searchBoardListAxiosApi = async (
-  boardListReqDto: BoardListReqDto
+  boardListReqDto: SearchBoardListReqDto
 ) => {
   const response = await axiosInstance.post<SearchBoardListApiResponse>(
     `${apiDomain}/api/searchBoardList`,

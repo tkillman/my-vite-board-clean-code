@@ -1,4 +1,4 @@
-import SearchAreaUI from '~/src/ui/main/searchAreaUI';
+import SearchAreaUI from '~/src/ui/views/main/searchAreaUI';
 
 const SearchAreaPT = () => {
   return <SearchAreaUI></SearchAreaUI>;

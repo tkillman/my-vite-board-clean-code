@@ -1,14 +1,13 @@
 import { useRecoilState } from 'recoil';
 
-import { systemAtom } from '../../application/repositories/recoil/system.recoil';
-
+import { systemState } from '~/src/entities/recoil/systemState.recoil';
 import { fuckWords } from '~/src/entities/system.domain';
 
 const FuckView = () => {
-  const [{ isFilterFuck }, setSystemAtomValue] = useRecoilState(systemAtom);
+  const [{ isFilterFuck }, setSystem] = useRecoilState(systemState);
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSystemAtomValue((prev) => ({
+    setSystem((prev) => ({
       ...prev,
       isFilterFuck: event.target.value === 'okFuck',
     }));

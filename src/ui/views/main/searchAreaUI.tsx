@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 
 import { ListSearchRow, ListSearchWrapper } from './SearchAreaUI.style';
 
-import { SearchBoardListReqDto } from '~/src/entities/dto/req/searchboardListReqDto';
+import { SearchBoardListReqDto } from '~/src/entities/dto/req/searchBoardListReqDto';
 
 interface IProps {
   onClickSearch?: (boardListReqDto: SearchBoardListReqDto) => void;

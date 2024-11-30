@@ -1,10 +1,10 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Footer from '../footer/footerView';
-import Header from '../header/headerView';
+import Footer from './footerView';
+import Header from './headerView';
 
-const LazyNotifyView = React.lazy(() => import('../notify/notifyView'));
+const LazyNotifyPT = React.lazy(() => import('~/presenters/notify/notifyPT'));
 
 interface IProps {}
 
@@ -17,7 +17,7 @@ const MasterLayout: React.FC<IProps> = () => {
       </main>
       <Footer />
       <React.Suspense fallback={<div>Loading...</div>}>
-        <LazyNotifyView />
+        <LazyNotifyPT />
       </React.Suspense>
     </div>
   );
