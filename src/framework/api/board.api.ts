@@ -5,7 +5,7 @@ import { BoardUpdateReqDto } from '../../entities/dto/req/boardUpdateReqDto';
 import { BoardCreateResDto } from '../../entities/dto/res/boardCreateResDto';
 import { BoardResDto } from '../../entities/dto/res/boardResDto';
 import { BoardUpdateResDto } from '../../entities/dto/res/boardUpdateResDto';
-import { targetApiDomain } from '../apiDomainUtil';
+import { targetApiDomain } from '../../lib/apiDomainUtil';
 
 import { SearchBoardListReqDto } from '~/src/entities/dto/req/searchBoardListReqDto';
 import { SearchBoardListApiResponse } from '~/src/entities/dto/res/searchBoardListResDto';
