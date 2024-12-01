@@ -1,8 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
-import FuckView from './fuckView';
-
 import { RoutePath } from '~/entities/route.domain';
+import FuckView from '~/src/ui/views/layout/fuckView';
 
 const HeaderView = () => {
   const navigate = useNavigate();
