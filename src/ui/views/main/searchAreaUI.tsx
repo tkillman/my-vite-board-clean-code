@@ -5,7 +5,7 @@ import { ListSearchRow, ListSearchWrapper } from './SearchAreaUI.style';
 import { SearchBoardListReqDto } from '~/src/entities/dto/req/searchBoardListReqDto';
 
 interface IProps {
-  onClickSearch?: (boardListReqDto: SearchBoardListReqDto) => void;
+  handleSearch?: (boardListReqDto: SearchBoardListReqDto) => void;
   onClickSave?: () => void;
 }
 
@@ -36,7 +36,7 @@ const SearchAreaUI: FC<IProps> = (props) => {
         <button
           type="button"
           onClick={() => {
-            props.onClickSearch?.(boardListReqDto);
+            props.handleSearch?.(boardListReqDto);
           }}
         >
           조회

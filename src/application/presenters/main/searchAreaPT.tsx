@@ -1,7 +1,20 @@
+import { useSetRecoilState } from 'recoil';
+
+import { SearchBoardListReqDto } from '~/src/entities/dto';
+import { boardListReqState } from '~/src/entities/recoil/boardListReqState.recoil';
 import SearchAreaUI from '~/src/ui/views/main/searchAreaUI';
 
 const SearchAreaPT = () => {
-  return <SearchAreaUI></SearchAreaUI>;
+  const setBoardListReqState = useSetRecoilState(boardListReqState);
+
+  return (
+    <SearchAreaUI
+      handleSearch={(boardListReqDto) => {
+        console.log('handleSearch');
+        setBoardListReqState(boardListReqDto);
+      }}
+    ></SearchAreaUI>
+  );
 };
 
 export default SearchAreaPT;

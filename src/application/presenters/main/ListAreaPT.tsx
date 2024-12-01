@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
+import { useRecoilValue } from 'recoil';
 
 import { BoardResDto } from '~/src/entities/dto/res/boardResDto';
 import { SearchBoardListAxiosResponse } from '~/src/entities/dto/res/searchBoardListResDto';
+import { boardListReqState } from '~/src/entities/recoil/boardListReqState.recoil';
 import {
   queryKeys,
   searchBoardListAxiosApi,
@@ -9,13 +11,15 @@ import {
 import ListAreaUI from '~/src/ui/views/main/ListAreaUI';
 
 const ListAreaPT = () => {
+  const boardListReqValue = useRecoilValue(boardListReqState);
+
   const queryResult = useQuery<
     SearchBoardListAxiosResponse,
     Error,
     BoardResDto[]
   >({
-    queryKey: queryKeys.board.list.queryKey,
-    queryFn: async () => await searchBoardListAxiosApi({ searchTitle: '' }),
+    queryKey: queryKeys.board.list(boardListReqValue).queryKey,
+    queryFn: async () => await searchBoardListAxiosApi(boardListReqValue),
     select: (response) => {
       return response?.data?.data ?? [];
     },

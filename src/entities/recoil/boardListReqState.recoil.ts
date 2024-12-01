@@ -2,11 +2,13 @@ import { atom } from 'recoil';
 
 import { SearchBoardListReqDto } from '~/entities/dto/req/searchBoardListReqDto';
 
-export const defaultBoardListReqDto: SearchBoardListReqDto = {
+type BoardListReqState = SearchBoardListReqDto;
+
+export const defaultBoardListReqDto: BoardListReqState = {
   searchTitle: '',
 };
 
-export const boardListReq = atom<SearchBoardListReqDto>({
-  key: 'boardListReq',
+export const boardListReqState = atom<BoardListReqState>({
+  key: 'boardListReqState',
   default: defaultBoardListReqDto,
 });

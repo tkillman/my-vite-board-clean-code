@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 
-import { RoutePath } from '~/entities/route.domain';
-import FuckView from '~/src/ui/components/fuckView';
+import FuckView from './fuckView';
 
-const Header = () => {
+import { RoutePath } from '~/entities/route.domain';
+
+const HeaderView = () => {
   const navigate = useNavigate();
 
   /**
@@ -23,4 +24,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderView;
