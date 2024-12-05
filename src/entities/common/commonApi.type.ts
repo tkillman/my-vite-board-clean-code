@@ -3,3 +3,8 @@ export type CommonApiType<T> = {
   message: string;
   data: T;
 };
+
+export type CommonErrorType = {
+  errorCode: string;
+  errorMessage: string;
+};

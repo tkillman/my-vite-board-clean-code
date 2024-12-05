@@ -5,6 +5,7 @@ import { useNotifyService } from '~/services/useNotifyService';
 import { BoardCreateReqDto } from '~/src/entities/dto';
 import { boardState } from '~/src/entities/recoil/board.recoil';
 import { createBoardAxiosApi } from '~/src/framework/api/boardAxios.api';
+import { axiosErrorParser } from '~/src/lib/axiosUtil';
 import BoardCreateUI from '~/src/ui/views/boardCreate/boardCreateUI';
 
 const BoardCreatePT = () => {
@@ -22,7 +23,14 @@ const BoardCreatePT = () => {
         notifyService.notify('게시글이 저장되었습니다.');
       },
       onError: (error) => {
-        notifyService.notify('게시글 저장에 실패했습니다.');
+        const errorData = axiosErrorParser(error);
+        let message = '게시글 저장에 실패했습니다.';
+
+        if (errorData) {
+          message += `[${errorData.errorCode}] ${errorData.errorMessage}`;
+        }
+
+        notifyService.notify(message);
       },
     });
   };

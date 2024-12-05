@@ -1,6 +1,8 @@
 // src/api/axiosInstance.ts
 //import * as Sentry from '@sentry/react';
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
+
+import { CommonErrorType } from '../entities/common/commonApi.type';
 
 //import { sentryLogger } from './sentryLogger';
 
@@ -32,3 +34,14 @@ axiosInstance.interceptors.response.use(
 );
 
 export default axiosInstance;
+
+export const axiosErrorParser = <T = CommonErrorType>(
+  error: Error
+): T | undefined => {
+  if (axios.isAxiosError<T>(error)) {
+    if (error.response) {
+      const data = error.response.data;
+      return data;
+    }
+  }
+};

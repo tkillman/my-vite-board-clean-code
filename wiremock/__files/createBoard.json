@@ -1,9 +1,10 @@
 {
-  "status": 200,
+  "status": "OK",
   "message": "성공",
   "data": {
     "boardId": "1",
     "title": "제목1",
     "content": "내용1"
-  }
+  },
+  "errorMessage": "서버 에러 메시지"
 }
