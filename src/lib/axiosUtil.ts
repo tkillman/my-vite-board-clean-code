@@ -55,15 +55,14 @@ export const errorMessageParser = <T>(
 ): string => {
   const defaultErrorMessage = '알 수 없는 오류입니다.';
   let errorMessage = '';
-  console.log('aaa', JSON.stringify(error));
   if (axios.isAxiosError<T>(error)) {
     if (error.response) {
       const data = error.response.data;
       errorMessage = String(data[errorMessageKey] ?? '');
     } else if (error.request) {
-      errorMessage = error.message;
+      errorMessage = `서버에 응답이 없습니다. ${error.message}`;
     } else {
-      errorMessage = error.message;
+      errorMessage = `API 오류입니다. ${error.message}`;
     }
   } else {
     errorMessage = error.message;
