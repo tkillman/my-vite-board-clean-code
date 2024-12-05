@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useNotifyService } from '~/services/useNotifyService';
 import { BoardCreateReqDto } from '~/src/entities/dto';
 import { createBoardAxiosApi } from '~/src/framework/api/boardAxios.api';
-import { axiosErrorParser } from '~/src/lib/axiosUtil';
+import { axiosErrorDataParser } from '~/src/lib/axiosUtil';
 import BoardCreateUI from '~/src/ui/views/boardCreate/boardCreateUI';
 
 const BoardCreatePT = () => {
@@ -19,7 +19,7 @@ const BoardCreatePT = () => {
         notifyService.notify('게시글이 저장되었습니다.');
       },
       onError: (error) => {
-        const errorData = axiosErrorParser(error);
+        const errorData = axiosErrorDataParser(error);
         let message = '게시글 저장에 실패했습니다.';
 
         if (errorData) {

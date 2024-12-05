@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "POST",
-    "url": "/api/searchBoardList",
+    "url": "/api/searchBoardList2",
     "bodyPatterns": [
       {
         "equalToJson": "{\"searchTitle\": \"123\"}"

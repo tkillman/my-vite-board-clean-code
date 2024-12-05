@@ -8,6 +8,7 @@ import {
   queryKeys,
   searchBoardListAxiosApi,
 } from '~/src/framework/api/boardAxios.api';
+import { errorMessageParser } from '~/src/lib/axiosUtil';
 import ListAreaUI from '~/src/ui/views/main/ListAreaUI';
 
 const ListAreaPT = () => {
@@ -21,17 +22,22 @@ const ListAreaPT = () => {
     queryKey: queryKeys.board.list(boardListReqValue).queryKey,
     queryFn: async () => await searchBoardListAxiosApi(boardListReqValue),
     select: (response) => {
+      //console.log('🚀 ~ ListAreaPT ~ response:', response);
+
       return response?.data?.data ?? [];
     },
   });
 
   return (
-    <ListAreaUI
-      list={queryResult.data ?? []}
-      isError={queryResult.isError}
-      isFetching={queryResult.isFetching}
-      isLoading={queryResult.isLoading}
-    />
+    <>
+      {queryResult.error && errorMessageParser(queryResult.error, 'er')}
+      <ListAreaUI
+        list={queryResult.data ?? []}
+        isError={queryResult.isError}
+        isFetching={queryResult.isFetching}
+        isLoading={queryResult.isLoading}
+      />
+    </>
   );
 };
 

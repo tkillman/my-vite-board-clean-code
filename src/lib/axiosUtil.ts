@@ -24,8 +24,11 @@ axiosInstance.interceptors.request.use((config) => {
 
 // 응답 인터셉터
 axiosInstance.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    return response;
+  },
   (error) => {
+    //console.log('🚀 ~ interceptors error:', error);
     // 센트리 로깅
     //sentryLogger(error);
 
@@ -35,7 +38,7 @@ axiosInstance.interceptors.response.use(
 
 export default axiosInstance;
 
-export const axiosErrorParser = <T = CommonErrorType>(
+export const axiosErrorDataParser = <T = CommonErrorType>(
   error: Error
 ): T | undefined => {
   if (axios.isAxiosError<T>(error)) {
@@ -44,4 +47,27 @@ export const axiosErrorParser = <T = CommonErrorType>(
       return data;
     }
   }
+};
+
+export const errorMessageParser = <T>(
+  error: Error,
+  errorMessageKey: keyof T
+): string => {
+  const defaultErrorMessage = '알 수 없는 오류입니다.';
+  let errorMessage = '';
+  console.log('aaa', JSON.stringify(error));
+  if (axios.isAxiosError<T>(error)) {
+    if (error.response) {
+      const data = error.response.data;
+      errorMessage = String(data[errorMessageKey] ?? '');
+    } else if (error.request) {
+      errorMessage = error.message;
+    } else {
+      errorMessage = error.message;
+    }
+  } else {
+    errorMessage = error.message;
+  }
+
+  return errorMessage || defaultErrorMessage;
 };
