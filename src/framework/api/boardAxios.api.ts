@@ -2,6 +2,7 @@
 import { createQueryKeyStore } from '@lukemorales/query-key-factory';
 
 import { BOARD_ID } from '~/src/entities/board.domain';
+import { BoardCreateReqDto, CreateBoardApiResponse } from '~/src/entities/dto';
 import { SearchBoardListReqDto } from '~/src/entities/dto/req/searchBoardListReqDto';
 import { SearchBoardListApiResponse } from '~/src/entities/dto/res/searchBoardListResDto';
 import { targetApiDomain } from '~/src/lib/apiDomainUtil';
@@ -24,6 +25,16 @@ export const searchBoardListAxiosApi = async (
     {
       searchTitle: boardListReqDto.searchTitle,
     }
+  );
+  return response;
+};
+
+export const createBoardAxiosApi = async (
+  boardCreateDto: BoardCreateReqDto
+) => {
+  const response = await axiosInstance.post<CreateBoardApiResponse>(
+    `${apiDomain}/api/createBoard`,
+    boardCreateDto
   );
   return response;
 };

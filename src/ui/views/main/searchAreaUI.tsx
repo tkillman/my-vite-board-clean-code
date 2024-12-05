@@ -6,7 +6,6 @@ import { SearchBoardListReqDto } from '~/src/entities/dto/req/searchBoardListReq
 
 interface IProps {
   handleSearch?: (boardListReqDto: SearchBoardListReqDto) => void;
-  onClickSave?: () => void;
 }
 
 const SearchAreaUI: FC<IProps> = (props) => {
@@ -48,11 +47,6 @@ const SearchAreaUI: FC<IProps> = (props) => {
           }}
         >
           Break the world
-        </button>
-      </ListSearchRow>
-      <ListSearchRow>
-        <button type="button" onClick={props.onClickSave}>
-          새글 등록
         </button>
       </ListSearchRow>
     </ListSearchWrapper>

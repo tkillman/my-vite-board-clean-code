@@ -15,7 +15,7 @@ export const ModalBtn = styled.button`
   padding: 10px;
   color: white;
   border-radius: 6px;
-  cursor: grab;
+  cursor: pointer;
 `;
 
 export const ModalBackdrop = styled.div`
