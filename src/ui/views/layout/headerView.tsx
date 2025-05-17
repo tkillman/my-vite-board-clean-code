@@ -17,7 +17,7 @@ const HeaderView = () => {
     <div>
       <FuckView />
       <div>
-        <button onClick={onClickMain}>메인 이동</button>
+        <button onClick={onClickMain}>메인 이동!!</button>
       </div>
     </div>
   );

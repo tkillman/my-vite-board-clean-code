@@ -1,5 +1,6 @@
 import path from 'path';
 
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import circleDependency from 'vite-plugin-circular-dependency';
@@ -11,6 +12,7 @@ export default defineConfig({
     circleDependency({
       outputFilePath: './circleDep',
     }),
+    tailwindcss(),
   ],
   resolve: {
     alias: [
@@ -42,6 +44,10 @@ export default defineConfig({
       {
         find: '~/entities',
         replacement: path.resolve(__dirname, 'src/entities/'),
+      },
+      {
+        find: '~/styles',
+        replacement: path.resolve(__dirname, 'src/styles/'),
       },
     ],
   },

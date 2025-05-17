@@ -13,8 +13,8 @@ const MainPage = () => {
   };
 
   return (
-    <div>
-      <h1>Board List View</h1>
+    <div className="">
+      <h1>Board List View!!</h1>
       <SearchAreaPT />
       <button type="button" onClick={onClickMoveNew}>
         새글 등록

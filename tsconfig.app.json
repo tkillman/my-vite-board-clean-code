@@ -31,7 +31,8 @@
       "~/controllers/*": ["src/application/controllers/*"],
       "~/presenters/*": ["src/application/presenters/*"],
       "~/services/*": ["src/application/services/*"],
-      "~/entities/*": ["src/entities/*"]
+      "~/entities/*": ["src/entities/*"],
+      "~/styles/*": ["src/styles/*"]
     }
   },
   "include": ["src"]

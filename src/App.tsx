@@ -1,7 +1,6 @@
-import * as Sentry from '@sentry/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 //import BoardView from './ui/pages/board/boardView';
 import { RecoilRoot } from 'recoil';
@@ -12,6 +11,7 @@ import MasterLayout from './ui/views/layout/masterLayout';
 const LazyMainPage = React.lazy(() => import('~/pages/mainPage'));
 const LazyBoardCreatePage = React.lazy(() => import('~/pages/boardCreatePage'));
 const LazyBoardDetailPage = React.lazy(() => import('~/pages/boardDetailPage'));
+const LazyAdPage = React.lazy(() => import('~/pages/adPage'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,14 +22,11 @@ const queryClient = new QueryClient({
   },
 });
 
-const targetElement = (routePath: RoutePath) => {
-  return (
-    <React.Suspense fallback={<div>로딩중</div>}>
-      {routePath === RoutePath.MAIN && <LazyMainPage />}
-      {routePath === RoutePath.BOARD_CREATE && <LazyBoardCreatePage />}
-      {routePath === RoutePath.BOARD_DETAIL && <LazyBoardDetailPage />}
-    </React.Suspense>
-  );
+const elements: Partial<Record<RoutePath, React.ReactNode>> = {
+  [RoutePath.MAIN]: <LazyMainPage />,
+  [RoutePath.BOARD_CREATE]: <LazyBoardCreatePage />,
+  [RoutePath.BOARD_DETAIL]: <LazyBoardDetailPage />,
+  [RoutePath.BOARD_UPDATE]: <LazyBoardCreatePage />,
 };
 
 const App = () => {
@@ -38,20 +35,30 @@ const App = () => {
       <RecoilRoot>
         <HashRouter>
           <Routes>
-            <Route path={RoutePath.MAIN} element={<MasterLayout />}>
-              <Route index element={targetElement(RoutePath.MAIN)} />
-              <Route
-                path={RoutePath.BOARD_CREATE}
-                element={targetElement(RoutePath.BOARD_CREATE)}
-              />
-              <Route
-                path={RoutePath.BOARD_DETAIL}
-                element={targetElement(RoutePath.BOARD_DETAIL)}
-              />
+            <Route
+              path={RoutePath.AD}
+              element={
+                <Suspense>
+                  <LazyAdPage />
+                </Suspense>
+              }
+            ></Route>
+            <Route element={<MasterLayout />}>
+              {Object.entries(RoutePath).map(([key, value]) => {
+                return (
+                  <Route
+                    key={key}
+                    path={value}
+                    element={
+                      <Suspense>{elements[value as RoutePath]}</Suspense>
+                    }
+                  />
+                );
+              })}
             </Route>
           </Routes>
         </HashRouter>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </RecoilRoot>
     </QueryClientProvider>
   );
