@@ -1,3 +1,4 @@
+import { FirstKim } from 'kim-gui';
 import { useNavigate } from 'react-router-dom';
 
 import ListAreaPT from '~/src/application/presenters/main/ListAreaPT';
@@ -14,7 +15,9 @@ const MainPage = () => {
 
   return (
     <div className="">
-      <h1>Board List View!!</h1>
+      <h1>
+        Board List View!! <FirstKim title="하하 신나" />
+      </h1>
       <SearchAreaPT />
       <button type="button" onClick={onClickMoveNew}>
         새글 등록
