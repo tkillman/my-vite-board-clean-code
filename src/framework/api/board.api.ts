@@ -1,3 +1,4 @@
+//import { ApiPath } from './enumApi';
 import { BOARD_ID } from '../../entities/board.domain';
 import { CommonApiType } from '../../entities/common/commonApi.type';
 import { BoardCreateReqDto } from '../../entities/dto/req/boardCreateReqDto';
@@ -5,17 +6,15 @@ import { BoardUpdateReqDto } from '../../entities/dto/req/boardUpdateReqDto';
 import { BoardCreateResDto } from '../../entities/dto/res/boardCreateResDto';
 import { BoardResDto } from '../../entities/dto/res/boardResDto';
 import { BoardUpdateResDto } from '../../entities/dto/res/boardUpdateResDto';
-import { targetApiDomain } from '../../lib/apiDomainUtil';
 
-import { SearchBoardListReqDto } from '~/src/entities/dto/req/searchBoardListReqDto';
-import { SearchBoardListApiResponse } from '~/src/entities/dto/res/searchBoardListResDto';
-
-const apiDomain = targetApiDomain();
+// import { SearchBoardListReqDto } from '~/src/entities/dto/req/searchBoardListReqDto';
+// import { SearchBoardListApiResponse } from '~/src/entities/dto/res/searchBoardListResDto';
+import { viteApiDomain } from '~/src/lib/envVars';
 
 export const createBoardApi = async (
   boardCreateDto: BoardCreateReqDto
 ): Promise<CommonApiType<BoardCreateResDto>> => {
-  const response = await fetch(`${apiDomain}/api/createBoard`, {
+  const response = await fetch(`${viteApiDomain}/api/createBoard`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -30,27 +29,30 @@ export const createBoardApi = async (
   return data;
 };
 
-export const searchBoardListApi = async (
-  boardListReqDto: SearchBoardListReqDto
-): Promise<SearchBoardListApiResponse> => {
-  const response = await fetch(`${apiDomain}/api/searchBoardList`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      searchTitle: boardListReqDto.searchTitle,
-    }),
-  });
-  const data = await response.json();
-  return data;
-};
+// export const searchBoardListApi = async (
+//   boardListReqDto: SearchBoardListReqDto
+// ): Promise<SearchBoardListApiResponse> => {
+//   const response = await fetch(
+//     `${targetApiDomain}/${ApiPath['api/searchBoardList']}`,
+//     {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//         searchTitle: boardListReqDto.searchTitle,
+//       }),
+//     }
+//   );
+//   const data = await response.json();
+//   return data;
+// };
 
 export const searchBoardDetailApi = async (
   boardId: BOARD_ID
 ): Promise<CommonApiType<BoardResDto>> => {
   const response = await fetch(
-    `${apiDomain}/api/searchBoardDetail/${boardId}`,
+    `${viteApiDomain}/api/searchBoardDetail/${boardId}`,
     {
       method: 'GET',
       headers: {
@@ -66,7 +68,7 @@ export const updateBoardApi = async (
   boardUpdateReqDto: BoardUpdateReqDto
 ): Promise<CommonApiType<BoardUpdateResDto>> => {
   const response = await fetch(
-    `${apiDomain}/api/updateBoard/${boardUpdateReqDto.boardId}`,
+    `${viteApiDomain}/api/updateBoard/${boardUpdateReqDto.boardId}`,
     {
       method: 'PATCH',
       headers: {

@@ -14,16 +14,11 @@ import ListAreaUI from '~/src/ui/views/main/ListAreaUI';
 const ListAreaPT = () => {
   const boardListReqValue = useRecoilValue(boardListReqState);
 
-  const queryResult = useQuery<
-    SearchBoardListAxiosResponse,
-    Error,
-    BoardResDto[]
-  >({
+  const queryResult = useQuery({
     queryKey: queryKeys.board.list(boardListReqValue).queryKey,
-    queryFn: async () => await searchBoardListAxiosApi(boardListReqValue),
-    select: (response) => {
-      //console.log('🚀 ~ ListAreaPT ~ response:', response);
-
+    queryFn: async () => {
+      const response = await searchBoardListAxiosApi(boardListReqValue);
+      console.log('response', response);
       return response?.data?.data ?? [];
     },
   });

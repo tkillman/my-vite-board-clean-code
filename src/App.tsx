@@ -8,6 +8,8 @@ import { RecoilRoot } from 'recoil';
 import { RoutePath } from './entities/route.domain';
 import MasterLayout from './ui/views/layout/masterLayout';
 
+import { worker } from '~/src/framework/mocks/browser';
+
 const LazyMainPage = React.lazy(() => import('~/pages/mainPage'));
 const LazyBoardCreatePage = React.lazy(() => import('~/pages/boardCreatePage'));
 const LazyBoardDetailPage = React.lazy(() => import('~/pages/boardDetailPage'));
@@ -30,6 +32,11 @@ const elements: Partial<Record<RoutePath, React.ReactNode>> = {
 };
 
 const App = () => {
+  const mockYn = localStorage.getItem('mockYn');
+  if (mockYn === 'Y') {
+    // If you are using MSW for mocking, uncomment the following line
+    worker.start();
+  }
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
