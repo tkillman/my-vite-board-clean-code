@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { RoutePath } from '~/entities/route.domain';
-import FuckView from '~/src/ui/views/layout/fuckView';
+// import FuckView from '~/src/ui/views/layout/fuckView';
 
 const HeaderView = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const HeaderView = () => {
 
   return (
     <div>
-      <FuckView />
+      {/* <FuckView /> */}
       <div>
         <button onClick={onClickMain}>메인 이동!!</button>
       </div>

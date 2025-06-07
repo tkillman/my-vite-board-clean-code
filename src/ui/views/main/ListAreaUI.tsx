@@ -8,17 +8,21 @@ import {
   ListRowWrapper,
 } from './ListAreaUI.style';
 
-import { Board } from '~/src/entities/board.domain';
+type ColumnInfo<T> = {
+  field: keyof T;
+  label: string;
+};
 
-type TypeListAreaUI = {
-  list: Board[];
+type TypeListAreaUI<T> = {
+  columnInfos: ColumnInfo<T>[];
+  list: T[];
   isFetching?: boolean;
   isError?: boolean;
   isLoading?: boolean;
-  handleClickRow?: (row: Board) => () => void;
+  handleClickRow?: (row: T) => () => void;
 };
 
-const ListAreaUI: React.FC<TypeListAreaUI> = (props) => {
+const ListAreaUI = <T,>(props: TypeListAreaUI<T>) => {
   if (props.isLoading) {
     return <div>로딩중...</div>;
   }
@@ -30,9 +34,9 @@ const ListAreaUI: React.FC<TypeListAreaUI> = (props) => {
   return (
     <ListContainer>
       <ListHeader>
-        <div>번호</div>
-        <div>제목</div>
-        <div>내용</div>
+        {props.columnInfos.map((column, index) => (
+          <div key={index}>{column.label}</div>
+        ))}
       </ListHeader>
       <ListRowWrapper>
         {props.isFetching && <ListLoadingWrapper>조회중</ListLoadingWrapper>}
@@ -40,14 +44,21 @@ const ListAreaUI: React.FC<TypeListAreaUI> = (props) => {
           props.list?.map((row, index) => {
             return (
               <ListRow
-                key={row.boardId}
+                key={index}
                 onClick={(e) => {
                   props.handleClickRow?.(row);
                 }}
               >
-                <div>{index}</div>
-                <div>{row.title}</div>
-                <div>{row.content}</div>
+                {props.columnInfos.map((column, colIndex) => {
+                  const isStrOrNumber =
+                    typeof row[column.field] === 'string' ||
+                    typeof row[column.field] === 'number';
+                  return (
+                    <div key={colIndex}>
+                      {isStrOrNumber && String(row[column.field])}
+                    </div>
+                  );
+                })}
               </ListRow>
             );
           })}

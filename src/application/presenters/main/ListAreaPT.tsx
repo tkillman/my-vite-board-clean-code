@@ -27,6 +27,16 @@ const ListAreaPT = () => {
     <>
       {queryResult.error && errorMessageParser(queryResult.error, 'er')}
       <ListAreaUI
+        columnInfos={[
+          {
+            field: 'title',
+            label: '제목',
+          },
+          {
+            field: 'content',
+            label: '내용',
+          },
+        ]}
         list={queryResult.data ?? []}
         isError={queryResult.isError}
         isFetching={queryResult.isFetching}
