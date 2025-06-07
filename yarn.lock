@@ -3126,10 +3126,10 @@ keyv@^4.5.3:
   dependencies:
     json-buffer "3.0.1"
 
-kim-gui@2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/kim-gui/-/kim-gui-2.0.5.tgz#c52b38707daa25cec6840e8b1275e24276db476b"
-  integrity sha512-A/M0KdZiqBIZoblHX6S4eMKeAkWfnfN3lnSPLOVOBrz8WIXvi0YJJcmMwdCpoY4bHWY818IcWzvdE5446SmdAw==
+kim-gui@^2.0.5:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/kim-gui/-/kim-gui-2.0.6.tgz#862e3dc32b0a8601ddcf6445c6444930c5dacc3d"
+  integrity sha512-dc9HtXaTtkUXSPmoB066C7KC+aBQu7H4xbok8s+2m333VO2l57hdCeed5i1k0ynbCZ9GlF43o/3Yly9L0vaV2w==
   dependencies:
     react "^18.3.1"
     react-dom "^18.3.1"

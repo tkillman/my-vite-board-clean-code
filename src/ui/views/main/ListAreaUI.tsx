@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
   ListContainer,
   ListHeader,
@@ -45,7 +43,7 @@ const ListAreaUI = <T,>(props: TypeListAreaUI<T>) => {
             return (
               <ListRow
                 key={index}
-                onClick={(e) => {
+                onClick={() => {
                   props.handleClickRow?.(row);
                 }}
               >
@@ -53,6 +51,7 @@ const ListAreaUI = <T,>(props: TypeListAreaUI<T>) => {
                   const isStrOrNumber =
                     typeof row[column.field] === 'string' ||
                     typeof row[column.field] === 'number';
+
                   return (
                     <div key={colIndex}>
                       {isStrOrNumber && String(row[column.field])}

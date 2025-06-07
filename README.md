@@ -87,3 +87,7 @@ https://wiremock.org/
 # wiremock template
 
 https://wiremock.org/docs/mock-api-templates/
+
+# yarn upgrade
+
+yarn upgrade kim-gui

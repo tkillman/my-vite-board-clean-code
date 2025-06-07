@@ -1,8 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRecoilValue } from 'recoil';
 
-import { BoardResDto } from '~/src/entities/dto/res/boardResDto';
-import { SearchBoardListAxiosResponse } from '~/src/entities/dto/res/searchBoardListResDto';
 import { boardListReqState } from '~/src/entities/recoil/boardListReqState.recoil';
 import {
   queryKeys,
