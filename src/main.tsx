@@ -3,4 +3,15 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
+const onOffWorker = async () => {
+  const mockYn = localStorage.getItem('mockYn');
+  if (mockYn === 'Y') {
+    // If you are using MSW for mocking, uncomment the following line
+    const { worker } = await import('../src/framework/mocks/browser.ts');
+    return worker.start();
+  }
+};
+
+onOffWorker().then(() => {
+  ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
+});

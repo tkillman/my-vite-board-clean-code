@@ -1,4 +1,3 @@
-//import { ApiPath } from './enumApi';
 import { BOARD_ID } from '../../entities/board.domain';
 import { CommonApiType } from '../../entities/common/commonApi.type';
 import { BoardCreateReqDto } from '../../entities/dto/req/boardCreateReqDto';
@@ -28,25 +27,6 @@ export const createBoardApi = async (
   const data = await response.json();
   return data;
 };
-
-// export const searchBoardListApi = async (
-//   boardListReqDto: SearchBoardListReqDto
-// ): Promise<SearchBoardListApiResponse> => {
-//   const response = await fetch(
-//     `${targetApiDomain}/${ApiPath['api/searchBoardList']}`,
-//     {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//         searchTitle: boardListReqDto.searchTitle,
-//       }),
-//     }
-//   );
-//   const data = await response.json();
-//   return data;
-// };
 
 export const searchBoardDetailApi = async (
   boardId: BOARD_ID

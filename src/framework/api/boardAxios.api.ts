@@ -21,7 +21,7 @@ export const searchBoardListAxiosApi = async (
   boardListReqDto: SearchBoardListReqDto
 ) => {
   const response = await axiosInstance.post<SearchBoardListApiResponse>(
-    `/${ApiPath['api/searchBoardList']}`,
+    `/${ApiPath['POST_api/searchBoardList']}`,
     {
       searchTitle: boardListReqDto.searchTitle,
     },

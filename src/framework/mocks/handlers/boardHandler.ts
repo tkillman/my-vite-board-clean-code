@@ -1,10 +1,25 @@
-import { http, HttpResponse } from 'msw';
+import { http, HttpHandler, HttpResponse, passthrough } from 'msw';
 
 import { SearchBoardListResDto } from '~/src/entities/dto';
+import { useMockGuiState } from '~/src/entities/zustand/useMockGuiState.zustand';
 import { ApiPath } from '~/src/framework/api/enumApi';
 
-export const boardHandler = [
-  http.post(`http://tb-todo.com/${ApiPath['api/searchBoardList']}`, () => {
+const searchBoardListHandler = [
+  http.post(`http://tb-todo.com/${ApiPath['POST_api/searchBoardList']}`, () => {
+    const targetMockGuiState =
+      useMockGuiState.getState().mocks[ApiPath['POST_api/searchBoardList']];
+
+    if (!targetMockGuiState?.isOn) {
+      return passthrough(); // 실제 API 호출로 넘어감
+    }
+
+    switch (key) {
+      case value:
+        break;
+
+      default:
+        break;
+    }
     const list: SearchBoardListResDto[] = [
       {
         boardId: '1',
@@ -29,3 +44,13 @@ export const boardHandler = [
     return HttpResponse.json({ data: list });
   }),
 ];
+
+const settingBoardHandler = (): HttpHandler[] => {
+  const handlers: HttpHandler[] = [];
+
+  const mocks = useMockGuiState.getState().mocks;
+
+  return handlers;
+};
+
+export const boardHandler = settingBoardHandler();

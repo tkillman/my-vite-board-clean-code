@@ -1,3 +1,4 @@
 export const enum ApiPath {
-  'api/searchBoardList' = 'api/searchBoardList',
+  'POST_api/searchBoardList' = 'api/searchBoardList',
+  'GET_api/boardDetail' = 'api/boardDetail',
 }
