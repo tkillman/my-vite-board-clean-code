@@ -1,12 +1,17 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { FirstKim } from 'kim-gui';
 import React, { Suspense } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 //import BoardView from './ui/pages/board/boardView';
 import { RecoilRoot } from 'recoil';
 
 import { RoutePath } from './entities/route.domain';
+import { useMockGuiState } from './entities/zustand/useMockGuiState.zustand';
+import { Apies } from './framework/api/enumApi';
+import { cases } from './framework/mocks/handlers/case';
 import MasterLayout from './ui/views/layout/masterLayout';
+import 'kim-gui/dist/kim-gui.css';
 
 const LazyMainPage = React.lazy(() => import('~/pages/mainPage'));
 const LazyBoardCreatePage = React.lazy(() => import('~/pages/boardCreatePage'));
@@ -30,6 +35,8 @@ const elements: Partial<Record<RoutePath, React.ReactNode>> = {
 };
 
 const App = () => {
+  const mockGuiState = useMockGuiState();
+
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
@@ -59,6 +66,12 @@ const App = () => {
           </Routes>
         </HashRouter>
         {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <FirstKim
+          apies={Apies}
+          cases={cases}
+          mocks={mockGuiState.mocks}
+          onChangeSelectCase={mockGuiState.onChangeSelectCase}
+        />
       </RecoilRoot>
     </QueryClientProvider>
   );

@@ -2,7 +2,7 @@ import { produce } from 'immer';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
-import { ApiPath } from '~/src/framework/api/enumApi';
+import { ApiPath, isApiPath } from '~/src/framework/api/enumApi';
 
 interface UseMockGuiState {
   isAllOn: boolean;
@@ -10,7 +10,7 @@ interface UseMockGuiState {
     [key in ApiPath]: { isOn: boolean; selectedCase: 'default' | string };
   }>;
   onChangeSelectCase: (
-    apiPath: ApiPath,
+    apiPath: string,
     selectedCase: 'default' | string
   ) => void;
 }
@@ -26,15 +26,15 @@ export const useMockGuiState = create<UseMockGuiState>()(
         },
       },
       onChangeSelectCase: (
-        apiPath: ApiPath,
+        apiPath: string,
         selectedCase: 'default' | string
       ) => {
         set((state) => {
           return produce(state, (draft) => {
-            if (!draft.mocks[apiPath]) {
-              draft.mocks[apiPath] = { isOn: false, selectedCase: 'default' };
+            if (isApiPath(apiPath)) {
+              draft.mocks[apiPath] ??= { isOn: false, selectedCase: 'default' };
+              draft.mocks[apiPath]!.selectedCase = selectedCase;
             }
-            draft.mocks[apiPath].selectedCase = selectedCase;
           });
         });
       },

@@ -1,11 +1,18 @@
 import ReactDOM from 'react-dom/client';
 
 import App from './App.tsx';
-import './index.css';
+//import './index.css';
 
 const onOffWorker = async () => {
-  const mockYn = localStorage.getItem('mockYn');
-  if (mockYn === 'Y') {
+  const mockGuiStorage = localStorage.getItem('mock-gui-storage');
+
+  if (!mockGuiStorage) {
+    return;
+  }
+
+  const isAllOn = JSON.parse(mockGuiStorage)?.isAllOn;
+
+  if (isAllOn === 'true') {
     // If you are using MSW for mocking, uncomment the following line
     const { worker } = await import('../src/framework/mocks/browser.ts');
     return worker.start();
